@@ -1,3 +1,4 @@
+/* BASE */
 body{
   margin:0;
   font-family:Arial;
@@ -23,11 +24,12 @@ body{
   color:#f4c400;
 }
 
+/* TÍTULO */
 h1{
   text-align:center;
 }
 
-/* BOTÃO */
+/* BOTÕES */
 .btn{
   width:100%;
   padding:15px;
@@ -36,6 +38,7 @@ h1{
   background:#FFD600;
   font-weight:bold;
   margin-bottom:10px;
+  cursor:pointer;
 }
 
 .btn-desativo{
@@ -52,6 +55,17 @@ select{
   padding:12px;
   border-radius:20px;
   margin-bottom:15px;
+  border:1px solid #ccc;
+}
+
+/* LINK TERMOS */
+.link-termos{
+  display:block;
+  text-align:center;
+  margin:10px 0;
+  color:#007bff;
+  text-decoration:none;
+  font-weight:bold;
 }
 
 /* ACEITE */
@@ -61,16 +75,10 @@ select{
   font-weight:bold;
 }
 
-/* LINK TERMOS */
-.link-termos{
-  text-align:center;
-  margin:10px 0;
-}
-
 /* VOLTAR */
 .voltar{
   text-align:center;
-  color:blue;
+  color:#007bff;
   margin-top:15px;
   cursor:pointer;
 }
