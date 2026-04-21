@@ -1,0 +1,76 @@
+body{
+  margin:0;
+  font-family:Arial;
+  background:#ffffff;
+}
+
+/* CONTEÚDO */
+.conteudo{
+  max-width:400px;
+  margin:0 auto;
+  padding:20px;
+}
+
+/* LOGO */
+.logo{
+  width:140px;
+  display:block;
+  margin:0 auto 10px;
+}
+
+.sub{
+  text-align:center;
+  color:#f4c400;
+}
+
+h1{
+  text-align:center;
+}
+
+/* BOTÃO */
+.btn{
+  width:100%;
+  padding:15px;
+  border:none;
+  border-radius:30px;
+  background:#FFD600;
+  font-weight:bold;
+  margin-bottom:10px;
+}
+
+.btn-desativo{
+  opacity:0.5;
+}
+
+.btn-disabled{
+  opacity:0.5;
+}
+
+/* SELECT */
+select{
+  width:100%;
+  padding:12px;
+  border-radius:20px;
+  margin-bottom:15px;
+}
+
+/* ACEITE */
+.aceite{
+  display:block;
+  margin:15px 0;
+  font-weight:bold;
+}
+
+/* LINK TERMOS */
+.link-termos{
+  text-align:center;
+  margin:10px 0;
+}
+
+/* VOLTAR */
+.voltar{
+  text-align:center;
+  color:blue;
+  margin-top:15px;
+  cursor:pointer;
+}
