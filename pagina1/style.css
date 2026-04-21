@@ -1,0 +1,104 @@
+body{
+  margin:0;
+  font-family:Arial;
+  background:#0f1c1c;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  height:100vh;
+}
+
+.card{
+  background:#eee;
+  width:90%;
+  max-width:400px;
+  padding:25px;
+  border-radius:20px;
+}
+
+.logo{
+  width:150px;
+  display:block;
+  margin:0 auto 10px;
+}
+
+.sub{
+  text-align:center;
+  color:#f4c400;
+}
+
+.titulo{
+  text-align:center;
+  margin-bottom:20px;
+}
+
+label{
+  display:block;
+  margin-top:10px;
+}
+
+input{
+  width:100%;
+  padding:12px;
+  border-radius:20px;
+  border:1px solid #ccc;
+  margin-top:5px;
+}
+
+.senha-box{
+  position:relative;
+}
+
+.senha-box span{
+  position:absolute;
+  right:15px;
+  top:50%;
+  transform:translateY(-50%);
+  cursor:pointer;
+}
+
+.linha{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  margin:10px 0;
+  font-size:14px;
+}
+
+.btn-entrar{
+  width:100%;
+  padding:14px;
+  background:#ffd400;
+  border:none;
+  border-radius:20px;
+  font-weight:bold;
+  font-size:16px;
+}
+
+.cadastro{
+  text-align:center;
+  margin:15px 0;
+}
+
+.ou{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:10px;
+}
+
+.ou span{
+  flex:1;
+  height:1px;
+  background:#ccc;
+}
+
+.btn-google{
+  width:100%;
+  padding:14px;
+  background:#000;
+  color:#fff;
+  border:none;
+  border-radius:20px;
+  margin-top:15px;
+}
