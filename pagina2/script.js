@@ -1,7 +1,7 @@
 let tipo = "";
 let cidadeOk = false;
 
-/* BOTÕES */
+/* SELEÇÃO BOTÕES */
 function selecionarTipo(t){
 
   tipo = t;
@@ -9,11 +9,18 @@ function selecionarTipo(t){
   const c = document.getElementById("btnCliente");
   const m = document.getElementById("btnMotorista");
 
-  c.classList.remove("btn-desativo");
-  m.classList.remove("btn-desativo");
+  c.classList.remove("btn-selecionado","btn-apagado");
+  m.classList.remove("btn-selecionado","btn-apagado");
 
-  if(t === "cliente") m.classList.add("btn-desativo");
-  if(t === "motorista") c.classList.add("btn-desativo");
+  if(t === "cliente"){
+    c.classList.add("btn-selecionado");
+    m.classList.add("btn-apagado");
+  }
+
+  if(t === "motorista"){
+    m.classList.add("btn-selecionado");
+    c.classList.add("btn-apagado");
+  }
 
   validar();
 }
@@ -47,10 +54,27 @@ function validar(){
     btn.disabled = true;
     btn.classList.add("btn-disabled");
   }
+}
 
+/* TERMOS */
+function irTermos(){
+  window.location.href = ROTAS.termos;
 }
 
 /* VOLTAR */
 function voltar(){
-  window.history.back();
+  window.location.href = ROTAS.login;
+}
+
+/* CONTINUAR */
+function continuar(){
+
+  if(tipo === "cliente"){
+    alert("Cadastro cliente (próxima etapa)");
+  }
+
+  if(tipo === "motorista"){
+    alert("Cadastro motorista (próxima etapa)");
+  }
+
 }
