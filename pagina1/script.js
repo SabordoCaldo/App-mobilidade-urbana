@@ -30,5 +30,5 @@ document.getElementById("telefone").addEventListener("input", function(e){
 
 /* BOTÃO ENTRAR */
 function entrar(){
-  window.location.href = "../pagina2/";
+  alert("Login ainda não implementado");
 }
