@@ -1,54 +1,65 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Moto Aqui</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Login</title>
 
-  <link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="style.css">
 </head>
+
 <body>
 
+<div class="container">
 <div class="card">
 
-  <img src="img/logo.png" class="logo">
+<img src="img/logo.png" class="logo">
 
-  <p class="sub">App de mobilidade urbana</p>
+<p class="sub">App de mobilidade urbana</p>
 
-  <h1 class="titulo">BEM-VINDO</h1>
+<h1>BEM-VINDO</h1>
 
-  <label>Telefone</label>
-  <input type="text" placeholder="(00) 00000-0000">
+<label>Telefone</label>
+<div class="input-box">
+  <input type="tel" id="telefone" placeholder="(00) 00000-0000">
+</div>
 
-  <label>Senha</label>
-  <div class="senha-box">
-    <input type="password" id="senha" placeholder="Senha">
-    <span id="iconeSenha" onclick="toggleSenha()">👁</span>
+<label>Senha</label>
+<div class="input-box">
+  <input type="password" id="senha" placeholder="Senha">
+
+  <span class="eye" onclick="toggleSenha('senha', this)">
+    <svg viewBox="0 0 24 24">
+      <path d="M1 12C3.5 7 7.5 4 12 4s8.5 3 11 8c-2.5 5-6.5 8-11 8s-8.5-3-11-8z"/>
+      <circle cx="12" cy="12" r="3"/>
+    </svg>
+  </span>
+</div>
+
+<div class="linha">
+  <div class="salvar">
+    <input type="checkbox" id="checkSalvar">
+    <label for="checkSalvar">Salvar senha</label>
   </div>
 
-  <div class="linha">
-    <div class="salvar">
-      <input type="checkbox" id="checkSalvar">
-      <label for="checkSalvar">Salvar senha</label>
-    </div>
+  <a href="#">Esqueci a senha</a>
+</div>
 
-    <a href="#">Esqueci a senha</a>
-  </div>
+<button class="btn" onclick="entrar()">Entrar</button>
 
-  <button class="btn-entrar">Entrar</button>
+<p class="cadastro">
+  Não tem conta? <a href="#">Cadastre-se</a>
+</p>
 
-  <p class="cadastro">
-    Não tem conta? <a href="#">Cadastre-se</a>
-  </p>
+<div class="ou">
+  <span></span>
+  <p>OU</p>
+  <span></span>
+</div>
 
-  <div class="ou">
-    <span></span>
-    <p>OU</p>
-    <span></span>
-  </div>
+<button class="btn-google">Entrar com conta Gmail</button>
 
-  <button class="btn-google">Entrar com conta Gmail</button>
-
+</div>
 </div>
 
 <script src="script.js"></script>
