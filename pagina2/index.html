@@ -6,6 +6,7 @@
 <title>Escolha</title>
 
 <link rel="stylesheet" href="style.css">
+<script src="../js/rotas.js"></script>
 </head>
 
 <body>
@@ -35,24 +36,24 @@
     <option value="outra">Outras cidades</option>
   </select>
 
-  <!-- LINK TERMOS -->
-  <a href="termos/termos.html" class="link-termos">
-    Ver termos de uso
-  </a>
+  <!-- TERMOS LINK -->
+  <a href="#" onclick="irTermos()" class="link-termos">Ver termos de uso</a>
 
   <!-- ACEITE -->
-  <label class="aceite">
+  <div class="aceite-termos">
     <input type="checkbox" id="aceite">
-    ESTOU CIENTE E ACEITO OS TERMOS
-  </label>
+    <label for="aceite">ESTOU CIENTE E ACEITO OS TERMOS</label>
+  </div>
 
   <!-- CONTINUAR -->
-  <button id="continuar" class="btn btn-disabled" disabled>
+  <button id="continuar" class="btn btn-disabled" disabled onclick="continuar()">
     Continuar
   </button>
 
   <!-- VOLTAR -->
-  <p class="voltar" onclick="voltar()">Voltar</p>
+  <p style="text-align:center; margin-top:15px;">
+    <a href="#" onclick="voltar()">Voltar</a>
+  </p>
 
 </div>
 
