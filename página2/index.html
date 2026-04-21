@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Escolha</title>
+
+<link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<div class="conteudo">
+
+  <img src="img/logo.png" class="logo">
+
+  <p class="sub">App de mobilidade urbana</p>
+
+  <h1>ESCOLHA</h1>
+
+  <!-- BOTÕES -->
+  <button id="btnCliente" class="btn" onclick="selecionarTipo('cliente')">
+    Sou Cliente
+  </button>
+
+  <button id="btnMotorista" class="btn" onclick="selecionarTipo('motorista')">
+    Sou Motorista
+  </button>
+
+  <!-- CIDADE -->
+  <label>Cidade</label>
+  <select id="cidade">
+    <option value="">Selecione a cidade</option>
+    <option value="passos">Passos</option>
+    <option value="outra">Outras cidades</option>
+  </select>
+
+  <!-- TERMOS -->
+  <p class="link-termos">
+    <a href="../termos/">Ver termos de uso</a>
+  </p>
+
+  <!-- ACEITE -->
+  <label class="aceite">
+    <input type="checkbox" id="aceite">
+    ESTOU CIENTE E ACEITO OS TERMOS
+  </label>
+
+  <!-- CONTINUAR -->
+  <button id="continuar" class="btn btn-disabled" disabled>
+    Continuar
+  </button>
+
+  <p class="voltar" onclick="voltar()">Voltar</p>
+
+</div>
+
+<script src="script.js"></script>
+</body>
+  </html>
