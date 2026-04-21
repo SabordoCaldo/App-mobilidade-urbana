@@ -1,1 +1,50 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Termos de Uso</title>
 
+<style>
+body{
+  font-family:Arial;
+  margin:0;
+  padding:20px;
+  background:#ffffff;
+}
+
+#conteudo{
+  max-width:500px;
+  margin:0 auto;
+}
+
+button{
+  width:100%;
+  padding:15px;
+  margin-top:20px;
+  border:none;
+  border-radius:10px;
+  background:#FFD600;
+  font-weight:bold;
+}
+</style>
+</head>
+
+<body>
+
+<div id="conteudo"></div>
+
+<button onclick="voltar()">Voltar</button>
+
+<script src="termos.js"></script>
+
+<script>
+document.getElementById("conteudo").innerHTML = window.termosApp.texto;
+
+function voltar(){
+  window.history.back();
+}
+</script>
+
+</body>
+</html>
