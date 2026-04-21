@@ -23,11 +23,15 @@
   <label>Senha</label>
   <div class="senha-box">
     <input type="password" id="senha" placeholder="Senha">
-    <span onclick="toggleSenha()">👁</span>
+    <span id="iconeSenha" onclick="toggleSenha()">👁</span>
   </div>
 
   <div class="linha">
-    <label><input type="checkbox"> Salvar senha</label>
+    <div class="salvar">
+      <input type="checkbox" id="checkSalvar">
+      <label for="checkSalvar">Salvar senha</label>
+    </div>
+
     <a href="#">Esqueci a senha</a>
   </div>
 
