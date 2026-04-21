@@ -32,3 +32,8 @@ document.getElementById("telefone").addEventListener("input", function(e){
 function entrar(){
   alert("Login ainda não implementado");
 }
+
+/* IR PARA CADASTRO (ROTA CENTRALIZADA) */
+function irCadastro(){
+  window.location.href = ROTAS.cadastroEscolha;
+}
