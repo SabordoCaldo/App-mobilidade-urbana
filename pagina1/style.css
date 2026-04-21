@@ -39,10 +39,12 @@ label{
 
 input{
   width:100%;
-  padding:12px;
-  border-radius:20px;
-  border:1px solid #ccc;
+  padding:14px;
+  border-radius:25px;
+  border:1px solid #ddd;
   margin-top:5px;
+  background:#f7f7f7;
+  font-size:14px;
 }
 
 .senha-box{
@@ -55,24 +57,39 @@ input{
   top:50%;
   transform:translateY(-50%);
   cursor:pointer;
+  font-size:18px;
+  color:#999;
 }
 
 .linha{
   display:flex;
   justify-content:space-between;
   align-items:center;
-  margin:10px 0;
+  margin:12px 0;
   font-size:14px;
+}
+
+.salvar{
+  display:flex;
+  align-items:center;
+  gap:6px;
+}
+
+.salvar input{
+  width:16px;
+  height:16px;
+  cursor:pointer;
 }
 
 .btn-entrar{
   width:100%;
-  padding:14px;
+  padding:15px;
   background:#ffd400;
   border:none;
-  border-radius:20px;
+  border-radius:30px;
   font-weight:bold;
   font-size:16px;
+  box-shadow:0 4px 10px rgba(0,0,0,0.1);
 }
 
 .cadastro{
@@ -95,10 +112,11 @@ input{
 
 .btn-google{
   width:100%;
-  padding:14px;
+  padding:15px;
   background:#000;
   color:#fff;
   border:none;
-  border-radius:20px;
+  border-radius:30px;
   margin-top:15px;
+  font-size:15px;
 }
