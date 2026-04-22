@@ -19,24 +19,30 @@ document.addEventListener("DOMContentLoaded", function(){
 
       preview.src = event.target.result;
 
+      // 🔥 destrói se já existir
       if(cropper){
         cropper.destroy();
       }
 
+      // 🔥 CROPPER AJUSTADO (QUADRADO FIXO + VISUAL)
       cropper = new Cropper(preview, {
         aspectRatio: 1,
         viewMode: 1,
-        autoCropArea: 1,
-        dragMode: "move",
-        cropBoxMovable: false,
-        cropBoxResizable: false,
-        guides: false,
-        center: false,
-        highlight: false,
-        background: false,
-        zoomable: true
+
+        dragMode: "move",        // move imagem
+        cropBoxMovable: false,   // trava o quadrado
+        cropBoxResizable: false, // não redimensiona
+
+        autoCropArea: 0.8,       // deixa o quadrado visível
+        guides: true,
+        center: true,
+        highlight: true,
+
+        zoomable: true,
+        background: false
       });
 
+      // mostra botão ✔
       btnConfirmar.style.display = "block";
     };
 
@@ -46,11 +52,13 @@ document.addEventListener("DOMContentLoaded", function(){
 });
 
 
+/* ABRIR GALERIA */
 function abrirFoto(){
   document.getElementById("fotoInput").click();
 }
 
 
+/* CONFIRMAR CORTE */
 function confirmarFoto(){
 
   if(!cropper) return;
@@ -73,7 +81,7 @@ function confirmarFoto(){
 }
 
 
-/* OLHO */
+/* OLHO (senha) */
 function toggleSenha(id, el){
   const input = document.getElementById(id);
 
@@ -89,5 +97,25 @@ function toggleSenha(id, el){
 
 /* CADASTRO */
 function cadastrar(){
-  alert("Cadastro funcionando 🚀");
+
+  const nome = document.getElementById("nome").value.trim();
+  const telefone = document.getElementById("telefone").value.trim();
+  const endereco = document.getElementById("endereco").value.trim();
+  const senha = document.getElementById("senha").value;
+  const confirmar = document.getElementById("confirmar").value;
+
+  if(!nome) return alert("Digite seu nome");
+  if(!telefone) return alert("Digite seu telefone");
+  if(!endereco) return alert("Digite seu endereço");
+  if(senha.length < 4) return alert("Senha mínimo 4 dígitos");
+  if(senha !== confirmar) return alert("Senhas não coincidem");
+
+  salvarCliente({
+    nome,
+    telefone,
+    endereco,
+    senha
+  });
+
+  alert("Cadastro salvo com sucesso 🚀");
 }
