@@ -130,19 +130,15 @@ input[type="file"]{
   left:0;
 }
 
-/* VOLTAR */
-.voltar{
-  display:block;
-  width:100%;
-  padding:15px;
+/* 🔙 VOLTAR (IGUAL PÁGINA 2) */
+.link-voltar{
+  display:inline-block;
   margin-top:15px;
-  text-align:center;
-  text-decoration:none;
-  border-radius:25px;
-  background:#FFD600;
+  color:#6f42c1;
   font-weight:bold;
+  text-decoration:none;
 }
 
-.voltar:active{
-  transform:scale(0.97);
+.link-voltar:active{
+  opacity:0.7;
 }
