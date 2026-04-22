@@ -1,44 +1,5 @@
 document.addEventListener("DOMContentLoaded", function(){
 
-  /* FOTO + SALVAR (CORRIGIDO) */
-  const inputFoto = document.getElementById("fotoInput");
-  const preview = document.getElementById("preview");
-
-  if(inputFoto && preview){
-
-    // carregar foto salva
-    const fotoSalva = localStorage.getItem("fotoUsuario");
-
-    if(fotoSalva){
-      preview.src = fotoSalva;
-    }
-
-    // alterar foto
-    inputFoto.addEventListener("change", function(e){
-
-      const file = e.target.files[0];
-      if(!file) return;
-
-      const reader = new FileReader();
-
-      reader.onload = function(ev){
-        const imagem = ev.target.result;
-
-        preview.src = imagem;
-
-        // salvar no navegador
-        localStorage.setItem("fotoUsuario", imagem);
-      };
-
-      reader.readAsDataURL(file);
-
-    });
-
-  }else{
-    console.log("Erro: fotoInput ou preview não encontrado");
-  }
-
-
   /* TELEFONE */
   const telefoneInput = document.getElementById("telefone");
 
@@ -65,7 +26,7 @@ document.addEventListener("DOMContentLoaded", function(){
 });
 
 
-/* OLHO (mostrar/ocultar senha) */
+/* OLHO */
 function toggleSenha(id, el){
   const input = document.getElementById(id);
 
