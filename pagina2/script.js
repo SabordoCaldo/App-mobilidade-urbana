@@ -9,7 +9,6 @@ function selecionarTipo(t){
   const c = document.getElementById("btnCliente");
   const m = document.getElementById("btnMotorista");
 
-  // limpa classes
   c.classList.remove("btn-selecionado","btn-apagado");
   m.classList.remove("btn-selecionado","btn-apagado");
 
@@ -59,7 +58,7 @@ function validar(){
   }
 }
 
-/* CONTINUAR (FUNCIONANDO NO GITHUB) */
+/* CONTINUAR (CORRIGIDO) */
 function continuar(){
 
   if(!tipo) return alert("Selecione cliente ou motorista");
