@@ -61,6 +61,7 @@ h1{
   object-fit:cover;
 }
 
+/* INPUT FILE */
 .foto input{
   position:absolute;
   width:100%;
@@ -68,7 +69,20 @@ h1{
   opacity:0;
 }
 
-/* OLHO (igual página 1) */
+/* ÍCONE SOBRE FOTO */
+.icone-foto{
+  position:absolute;
+  width:30px;
+  height:30px;
+  bottom:5px;
+  right:5px;
+  background:#fff;
+  border-radius:50%;
+  padding:4px;
+  box-shadow:0 0 5px rgba(0,0,0,0.2);
+}
+
+/* OLHO */
 .eye{
   position:absolute;
   right:10px;
@@ -114,15 +128,4 @@ h1{
   margin-top:15px;
   color:#6f42c1;
   font-weight:bold;
-}
-
-.icone-foto{
-  position:absolute;
-  width:40px;
-  bottom:5px;
-  right:5px;
-  background:#fff;
-  border-radius:50%;
-  padding:5px;
-  box-shadow:0 0 5px rgba(0,0,0,0.2);
 }
