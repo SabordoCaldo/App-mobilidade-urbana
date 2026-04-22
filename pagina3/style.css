@@ -55,7 +55,7 @@ label{
 }
 
 /* ========================= */
-/* OLHO CORRIGIDO 🔥 */
+/* OLHO CORRIGIDO */
 /* ========================= */
 
 .eye{
@@ -167,13 +167,30 @@ label{
 }
 
 /* ========================= */
-/* CROPPER */
+/* CROPPER AJUSTADO 🔥 */
 /* ========================= */
 
+/* QUADRADO DE CORTE VISÍVEL */
 .cropper-view-box{
   outline:2px solid #FFD600;
 }
 
+/* FUNDO ESCURO FORA DO CORTE */
+.cropper-modal{
+  background:rgba(0,0,0,0.5);
+}
+
+/* REMOVE LINHAS TRACEJADAS */
 .cropper-dashed{
   display:none;
+}
+
+/* REMOVE SOMBRA EXCESSIVA */
+.cropper-face{
+  background-color:transparent !important;
+}
+
+/* MELHORA VISUAL DO CONTORNO */
+.cropper-crop-box{
+  border:2px solid #FFD600;
 }
