@@ -1,44 +1,50 @@
 document.addEventListener("DOMContentLoaded", function(){
 
-  /* FOTO + SALVAR */
+  /* FOTO + SALVAR (CORRIGIDO) */
   const inputFoto = document.getElementById("fotoInput");
   const preview = document.getElementById("preview");
 
-  /* CARREGAR FOTO SALVA */
-  const fotoSalva = localStorage.getItem("fotoUsuario");
+  if(inputFoto && preview){
 
-  if(fotoSalva){
-    preview.src = fotoSalva;
-  }
+    // carregar foto salva
+    const fotoSalva = localStorage.getItem("fotoUsuario");
 
-  /* ALTERAR FOTO */
-  if(inputFoto){
+    if(fotoSalva){
+      preview.src = fotoSalva;
+    }
+
+    // alterar foto
     inputFoto.addEventListener("change", function(e){
 
       const file = e.target.files[0];
+      if(!file) return;
 
-      if(file){
-        const reader = new FileReader();
+      const reader = new FileReader();
 
-        reader.onload = function(ev){
-          const imagem = ev.target.result;
+      reader.onload = function(ev){
+        const imagem = ev.target.result;
 
-          preview.src = imagem;
+        preview.src = imagem;
 
-          localStorage.setItem("fotoUsuario", imagem);
-        };
+        // salvar no navegador
+        localStorage.setItem("fotoUsuario", imagem);
+      };
 
-        reader.readAsDataURL(file);
-      }
+      reader.readAsDataURL(file);
 
     });
+
+  }else{
+    console.log("Erro: fotoInput ou preview não encontrado");
   }
+
 
   /* TELEFONE */
   const telefoneInput = document.getElementById("telefone");
 
   if(telefoneInput){
     telefoneInput.addEventListener("input", function(e){
+
       let v = e.target.value.replace(/\D/g,"");
 
       if(v.length > 11) v = v.slice(0,11);
@@ -52,13 +58,14 @@ document.addEventListener("DOMContentLoaded", function(){
       }
 
       e.target.value = v;
+
     });
   }
 
 });
 
 
-/* OLHO */
+/* OLHO (mostrar/ocultar senha) */
 function toggleSenha(id, el){
   const input = document.getElementById(id);
 
