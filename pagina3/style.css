@@ -48,7 +48,7 @@ label{
   height:120px;
   margin:auto;
   border-radius:16px;
-  overflow:visible;
+  overflow:hidden;
   border:2px solid #FFD600;
   background:#ddd;
 }
@@ -84,26 +84,7 @@ label{
   display:none;
 }
 
-.cropper-view-box,
-.cropper-face{
-  border:2px solid #FFD600;
-}
-
-.eye{
-  position:absolute;
-  right:10px;
-  top:50%;
-  transform:translateY(-50%);
-  width:20px;
-  height:20px;
-}
-
-.eye path{
-  stroke:#777;
-  stroke-width:2;
-  fill:none;
-}
-
-.eye.off path{
-  stroke:red;
+/* CROP */
+.cropper-view-box{
+  outline:2px solid #FFD600;
 }
