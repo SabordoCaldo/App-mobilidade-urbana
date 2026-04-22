@@ -4,12 +4,16 @@ document.addEventListener("DOMContentLoaded", function(){
 
   const input = document.getElementById("fotoInput");
   const preview = document.getElementById("preview");
+  const btnConfirmar = document.getElementById("btnConfirmar");
 
   // carregar foto salva
   const fotoSalva = localStorage.getItem("fotoUsuario");
   if(fotoSalva){
     preview.src = fotoSalva;
   }
+
+  // esconder botão confirmar inicialmente
+  btnConfirmar.style.display = "none";
 
   // selecionar imagem
   input.addEventListener("change", function(e){
@@ -23,15 +27,19 @@ document.addEventListener("DOMContentLoaded", function(){
 
       preview.src = event.target.result;
 
+      // destruir crop anterior
       if(cropper){
         cropper.destroy();
       }
 
+      // iniciar crop
       cropper = new Cropper(preview, {
         aspectRatio: 1,
-        viewMode: 1
+        viewMode: 1,
       });
 
+      // mostrar botão confirmar
+      btnConfirmar.style.display = "block";
     };
 
     reader.readAsDataURL(file);
@@ -42,12 +50,13 @@ document.addEventListener("DOMContentLoaded", function(){
 
 /* ABRIR GALERIA */
 function abrirFoto(){
-  document.getElementById("fotoInput").click();
+  const input = document.getElementById("fotoInput");
+  if(input) input.click();
 }
 
 
-/* SALVAR CORTE */
-function cortarFoto(){
+/* CONFIRMAR FOTO (CORTAR) */
+function confirmarFoto(){
 
   if(!cropper) return;
 
@@ -58,15 +67,21 @@ function cortarFoto(){
 
   const imagemFinal = canvas.toDataURL("image/jpeg");
 
-  document.getElementById("preview").src = imagemFinal;
+  const preview = document.getElementById("preview");
+  preview.src = imagemFinal;
 
+  // salvar no navegador
   localStorage.setItem("fotoUsuario", imagemFinal);
 
   cropper.destroy();
+  cropper = null;
+
+  // esconder botão confirmar
+  document.getElementById("btnConfirmar").style.display = "none";
 }
 
 
-/* OLHO */
+/* OLHO (mostrar/ocultar senha) */
 function toggleSenha(id, el){
   const input = document.getElementById(id);
 
