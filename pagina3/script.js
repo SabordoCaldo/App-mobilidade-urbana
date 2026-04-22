@@ -1,42 +1,40 @@
 document.addEventListener("DOMContentLoaded", function(){
 
-  /* TELEFONE */
-  const telefoneInput = document.getElementById("telefone");
+  const input = document.getElementById("fotoInput");
+  const preview = document.getElementById("preview");
 
-  if(telefoneInput){
-    telefoneInput.addEventListener("input", function(e){
-
-      let v = e.target.value.replace(/\D/g,"");
-
-      if(v.length > 11) v = v.slice(0,11);
-
-      if(v.length > 6){
-        v = v.replace(/^(\d{2})(\d{5})(\d{0,4})$/, "($1) $2-$3");
-      } else if(v.length > 2){
-        v = v.replace(/^(\d{2})(\d{0,5})$/, "($1) $2");
-      } else{
-        v = v.replace(/^(\d*)$/, "($1");
-      }
-
-      e.target.value = v;
-
-    });
+  /* CARREGAR FOTO SALVA */
+  const fotoSalva = localStorage.getItem("fotoUsuario");
+  if(fotoSalva){
+    preview.src = fotoSalva;
   }
+
+  /* ALTERAR FOTO */
+  input.addEventListener("change", function(e){
+
+    const file = e.target.files[0];
+    if(!file) return;
+
+    const reader = new FileReader();
+
+    reader.onload = function(event){
+      const imagem = event.target.result;
+
+      preview.src = imagem;
+
+      // salva
+      localStorage.setItem("fotoUsuario", imagem);
+    };
+
+    reader.readAsDataURL(file);
+  });
 
 });
 
 
-/* OLHO */
-function toggleSenha(id, el){
-  const input = document.getElementById(id);
-
-  if(input.type === "password"){
-    input.type = "text";
-    el.classList.add("off");
-  }else{
-    input.type = "password";
-    el.classList.remove("off");
-  }
+/* ABRIR GALERIA/CÂMERA */
+function abrirFoto(){
+  document.getElementById("fotoInput").click();
 }
 
 
