@@ -1,33 +1,37 @@
 document.addEventListener("DOMContentLoaded", function(){
 
+  /* FOTO */
   const input = document.getElementById("fotoInput");
   const preview = document.getElementById("preview");
 
-  /* CARREGAR FOTO SALVA */
-  const fotoSalva = localStorage.getItem("fotoUsuario");
-  if(fotoSalva){
-    preview.src = fotoSalva;
+  if(input && preview){
+
+    // carregar foto salva
+    const fotoSalva = localStorage.getItem("fotoUsuario");
+    if(fotoSalva){
+      preview.src = fotoSalva;
+    }
+
+    // alterar foto
+    input.addEventListener("change", function(e){
+
+      const file = e.target.files[0];
+      if(!file) return;
+
+      const reader = new FileReader();
+
+      reader.onload = function(event){
+        const imagem = event.target.result;
+
+        preview.src = imagem;
+
+        // salvar no navegador
+        localStorage.setItem("fotoUsuario", imagem);
+      };
+
+      reader.readAsDataURL(file);
+    });
   }
-
-  /* ALTERAR FOTO */
-  input.addEventListener("change", function(e){
-
-    const file = e.target.files[0];
-    if(!file) return;
-
-    const reader = new FileReader();
-
-    reader.onload = function(event){
-      const imagem = event.target.result;
-
-      preview.src = imagem;
-
-      // salva
-      localStorage.setItem("fotoUsuario", imagem);
-    };
-
-    reader.readAsDataURL(file);
-  });
 
 });
 
@@ -35,6 +39,20 @@ document.addEventListener("DOMContentLoaded", function(){
 /* ABRIR GALERIA/CÂMERA */
 function abrirFoto(){
   document.getElementById("fotoInput").click();
+}
+
+
+/* OLHO (mostrar/ocultar senha) */
+function toggleSenha(id, el){
+  const input = document.getElementById(id);
+
+  if(input.type === "password"){
+    input.type = "text";
+    el.classList.add("off");
+  }else{
+    input.type = "password";
+    el.classList.remove("off");
+  }
 }
 
 
