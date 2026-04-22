@@ -1,69 +1,75 @@
 /* =========================
-   LISTAR MOTORISTAS
+   LISTA DE MOTORISTAS
 ========================= */
-function getMotoristas(){
-  const dados = localStorage.getItem("motoristas");
-  return dados ? JSON.parse(dados) : [];
-}
+let motoristas = [];
 
 
 /* =========================
-   SALVAR NOVO MOTORISTA
+   CARREGAR MOTORISTAS
 ========================= */
-function salvarMotorista(novoMotorista){
+function carregarMotoristas(){
+  const dados = localStorage.getItem("motoristas");
+  if(dados){
+    motoristas = JSON.parse(dados);
+  }
+}
 
-  const motoristas = getMotoristas();
+carregarMotoristas();
 
-  // 🚨 EVITAR DUPLICIDADE (telefone)
-  const existe = motoristas.find(m => m.telefone === novoMotorista.telefone);
+
+/* =========================
+   SALVAR MOTORISTA (PÁGINA 4)
+========================= */
+function salvarMotorista(motorista){
+
+  // 🚨 evitar duplicidade
+  const existe = motoristas.find(m => m.telefone === motorista.telefone);
   if(existe){
     alert("Já existe um motorista com esse telefone");
     return false;
   }
 
-  const motorista = {
+  const novoMotorista = {
     id: Date.now(),
 
     // DADOS PESSOAIS
-    nome: novoMotorista.nome,
-    telefone: novoMotorista.telefone,
-    endereco: novoMotorista.endereco,
-    cnh: novoMotorista.cnh,
-    senha: novoMotorista.senha,
+    nome: motorista.nome,
+    telefone: motorista.telefone,
+    endereco: motorista.endereco,
+    cnh: motorista.cnh,
+    senha: motorista.senha,
 
     // IMAGENS
-    fotoPerfil: novoMotorista.fotoPerfil,
-    fotoCNH: novoMotorista.fotoCNH,
+    fotoPerfil: motorista.fotoPerfil || "",
+    fotoCNH: motorista.fotoCNH || "",
 
-    // DADOS DO VEÍCULO (preenchido na página 5)
+    // DADOS VEÍCULO (página 5)
     placa: "",
     modelo: "",
     cor: "",
     renavan: "",
     fotoCRLV: "",
 
-    // STATUS
+    // CONTROLE
     status: "pendente", // pendente | aprovado | bloqueado
-
     criadoEm: new Date().toISOString()
   };
 
-  motoristas.push(motorista);
+  motoristas.push(novoMotorista);
 
   localStorage.setItem("motoristas", JSON.stringify(motoristas));
 
-  // 🔥 SALVA ID ATUAL (para página 5)
-  localStorage.setItem("motoristaAtualId", motorista.id);
+  // salva ID atual (fluxo para página 5)
+  localStorage.setItem("motoristaAtualId", novoMotorista.id);
 
   return true;
 }
 
 
 /* =========================
-   BUSCAR POR TELEFONE
+   BUSCAR MOTORISTA
 ========================= */
 function buscarMotorista(telefone){
-  const motoristas = getMotoristas();
   return motoristas.find(m => m.telefone === telefone);
 }
 
@@ -72,26 +78,58 @@ function buscarMotorista(telefone){
    BUSCAR POR ID
 ========================= */
 function getMotoristaPorId(id){
-  const motoristas = getMotoristas();
-  return motoristas.find(m => m.id === id);
+  return motoristas.find(m => m.id == id);
 }
 
 
 /* =========================
-   ATUALIZAR MOTORISTA
+   ATUALIZAR MOTORISTA (PÁGINA 5)
 ========================= */
 function atualizarMotorista(id, dadosAtualizados){
 
-  const motoristas = getMotoristas();
-
-  const atualizados = motoristas.map(m => {
-    if(m.id === id){
+  motoristas = motoristas.map(m => {
+    if(m.id == id){
       return { ...m, ...dadosAtualizados };
     }
     return m;
   });
 
-  localStorage.setItem("motoristas", JSON.stringify(atualizados));
+  localStorage.setItem("motoristas", JSON.stringify(motoristas));
+}
+
+
+/* =========================
+   BLOQUEAR MOTORISTA
+========================= */
+function bloquearMotorista(id){
+
+  atualizarMotorista(id, {
+    status: "bloqueado"
+  });
+
+}
+
+
+/* =========================
+   APROVAR MOTORISTA
+========================= */
+function aprovarMotorista(id){
+
+  atualizarMotorista(id, {
+    status: "aprovado"
+  });
+
+}
+
+
+/* =========================
+   REMOVER MOTORISTA
+========================= */
+function removerMotorista(id){
+
+  motoristas = motoristas.filter(m => m.id !== id);
+
+  localStorage.setItem("motoristas", JSON.stringify(motoristas));
 }
 
 
@@ -102,23 +140,6 @@ function getMotoristaAtualId(){
   return localStorage.getItem("motoristaAtualId");
 }
 
-
-/* =========================
-   LIMPAR MOTORISTA ATUAL
-========================= */
 function limparMotoristaAtual(){
   localStorage.removeItem("motoristaAtualId");
-}
-
-
-/* =========================
-   REMOVER MOTORISTA
-========================= */
-function removerMotorista(id){
-
-  const motoristas = getMotoristas();
-
-  const filtrados = motoristas.filter(m => m.id !== id);
-
-  localStorage.setItem("motoristas", JSON.stringify(filtrados));
 }
