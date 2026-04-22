@@ -43,48 +43,6 @@ h1{
   font-weight:bold;
 }
 
-/* FOTO */
-.foto{
-  position:relative;
-  width:110px;
-  height:110px;
-  margin:0 auto 20px;
-  border-radius:50%;
-  overflow:hidden;
-  background:#eee;
-
-  /* 👇 BORDA ESTILO APP */
-  border:3px solid #FFD600;
-}
-
-.foto img{
-  width:100%;
-  height:100%;
-  object-fit:cover;
-  object-position:center;
-}
-
-/* INPUT FILE */
-.foto input{
-  position:absolute;
-  width:100%;
-  height:100%;
-  opacity:0;
-}
-
-/* ÍCONE SOBRE FOTO */
-.icone-foto{
-  position:absolute;
-  width:30px;
-  height:30px;
-  bottom:5px;
-  right:5px;
-  background:#fff;
-  border-radius:50%;
-  padding:4px;
-  box-shadow:0 0 5px rgba(0,0,0,0.2);
-}
-
 /* OLHO */
 .eye{
   position:absolute;
