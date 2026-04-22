@@ -1,3 +1,36 @@
+/* FOTO + SALVAR */
+const inputFoto = document.getElementById("fotoInput");
+const preview = document.getElementById("preview");
+
+/* CARREGAR FOTO SALVA */
+const fotoSalva = localStorage.getItem("fotoUsuario");
+
+if(fotoSalva){
+  preview.src = fotoSalva;
+}
+
+/* ALTERAR FOTO */
+inputFoto.addEventListener("change", function(e){
+
+  const file = e.target.files[0];
+
+  if(file){
+    const reader = new FileReader();
+
+    reader.onload = function(ev){
+      const imagem = ev.target.result;
+
+      preview.src = imagem;
+
+      // 🔥 SALVA A FOTO
+      localStorage.setItem("fotoUsuario", imagem);
+    };
+
+    reader.readAsDataURL(file);
+  }
+
+});
+
 /* OLHO */
 function toggleSenha(id, el){
   const input = document.getElementById(id);
