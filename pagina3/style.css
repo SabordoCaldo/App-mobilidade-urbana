@@ -156,3 +156,8 @@ label{
 #fotoInput{
   display:none;
 }
+
+.cropper-view-box,
+.cropper-face {
+  border: 2px solid #FFD600;
+}
