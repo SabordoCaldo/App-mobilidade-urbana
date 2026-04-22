@@ -1,59 +1,62 @@
-let cropper;
+document.addEventListener("DOMContentLoaded", function(){
+
+  const input = document.getElementById("fotoInput");
+  const preview = document.getElementById("preview");
+
+  // carregar foto salva
+  const fotoSalva = localStorage.getItem("fotoUsuario");
+  if(fotoSalva){
+    preview.src = fotoSalva;
+  }
+
+  input.addEventListener("change", function(e){
+
+    const file = e.target.files[0];
+    if(!file) return;
+
+    const reader = new FileReader();
+
+    reader.onload = function(event){
+      const imagem = event.target.result;
+
+      preview.src = imagem;
+      localStorage.setItem("fotoUsuario", imagem);
+    };
+
+    reader.readAsDataURL(file);
+  });
+
+});
+
 
 function abrirFoto(){
   document.getElementById("fotoInput").click();
 }
 
-document.getElementById("fotoInput").addEventListener("change", function(e){
 
-  const file = e.target.files[0];
-  if(!file) return;
+function removerFoto(){
+  const preview = document.getElementById("preview");
 
-  const reader = new FileReader();
+  preview.src = "foto/avatar-padrao.png";
+  localStorage.removeItem("fotoUsuario");
+}
 
-  reader.onload = function(event){
 
-    const modal = document.getElementById("modalCrop");
-    const img = document.getElementById("imagemCrop");
+/* OLHO */
+function toggleSenha(id, el){
+  const input = document.getElementById(id);
 
-    img.src = event.target.result;
+  if(input.type === "password"){
+    input.type = "text";
+    el.classList.add("off");
+  }else{
+    input.type = "password";
+    el.classList.remove("off");
+  }
+}
 
-    modal.style.display = "flex";
 
-    if(cropper) cropper.destroy();
-
-    cropper = new Cropper(img, {
-      aspectRatio: 1,
-      viewMode: 1,
-      dragMode: "move",
-      cropBoxMovable: false,
-      cropBoxResizable: false,
-      autoCropArea: 0.8,
-      zoomable: true,
-      background: false
-    });
-
-  };
-
-  reader.readAsDataURL(file);
-});
-
-function confirmarFoto(){
-
-  if(!cropper) return;
-
-  const canvas = cropper.getCroppedCanvas({
-    width:300,
-    height:300
-  });
-
-  const imagemFinal = canvas.toDataURL("image/jpeg");
-
-  document.getElementById("preview").src = imagemFinal;
-
-  localStorage.setItem("fotoUsuario", imagemFinal);
-
-  cropper.destroy();
-
-  document.getElementById("modalCrop").style.display = "none";
+/* CADASTRO */
+function cadastrar(){
+  alert("Cadastro funcionando 🚀");
 }
