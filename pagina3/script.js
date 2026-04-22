@@ -6,16 +6,13 @@ document.addEventListener("DOMContentLoaded", function(){
   const preview = document.getElementById("preview");
   const btnConfirmar = document.getElementById("btnConfirmar");
 
-  // carregar foto salva
+  btnConfirmar.style.display = "none";
+
   const fotoSalva = localStorage.getItem("fotoUsuario");
   if(fotoSalva){
     preview.src = fotoSalva;
   }
 
-  // esconder botão confirmar inicialmente
-  btnConfirmar.style.display = "none";
-
-  // selecionar imagem
   input.addEventListener("change", function(e){
 
     const file = e.target.files[0];
@@ -27,18 +24,24 @@ document.addEventListener("DOMContentLoaded", function(){
 
       preview.src = event.target.result;
 
-      // destruir crop anterior
       if(cropper){
         cropper.destroy();
       }
 
-      // iniciar crop
       cropper = new Cropper(preview, {
         aspectRatio: 1,
         viewMode: 1,
+        autoCropArea: 0.8,
+        movable: true,
+        zoomable: true,
+        scalable: true,
+        cropBoxMovable: true,
+        cropBoxResizable: true,
+        guides: true,
+        highlight: true,
+        background: false
       });
 
-      // mostrar botão confirmar
       btnConfirmar.style.display = "block";
     };
 
@@ -48,14 +51,11 @@ document.addEventListener("DOMContentLoaded", function(){
 });
 
 
-/* ABRIR GALERIA */
 function abrirFoto(){
-  const input = document.getElementById("fotoInput");
-  if(input) input.click();
+  document.getElementById("fotoInput").click();
 }
 
 
-/* CONFIRMAR FOTO (CORTAR) */
 function confirmarFoto(){
 
   if(!cropper) return;
@@ -67,21 +67,17 @@ function confirmarFoto(){
 
   const imagemFinal = canvas.toDataURL("image/jpeg");
 
-  const preview = document.getElementById("preview");
-  preview.src = imagemFinal;
-
-  // salvar no navegador
+  document.getElementById("preview").src = imagemFinal;
   localStorage.setItem("fotoUsuario", imagemFinal);
 
   cropper.destroy();
   cropper = null;
 
-  // esconder botão confirmar
   document.getElementById("btnConfirmar").style.display = "none";
 }
 
 
-/* OLHO (mostrar/ocultar senha) */
+/* OLHO */
 function toggleSenha(id, el){
   const input = document.getElementById(id);
 
