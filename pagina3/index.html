@@ -22,7 +22,14 @@
 <!-- FOTO -->
 <div class="foto-container">
   <img id="preview" src="foto/avatar-padrao.png">
+  
+  <!-- BOTÃO CONFIRMAR (SOBRE A IMAGEM) -->
+  <button id="btnConfirmar" class="btn-confirmar" onclick="confirmarFoto()">✔</button>
 </div>
+
+<button class="btn-foto" onclick="abrirFoto()">Adicionar foto</button>
+
+<input type="file" id="fotoInput" accept="image/*">
 
 <!-- BOTÃO FOTO -->
 <button class="btn-foto" onclick="abrirFoto()">Adicionar foto</button>
