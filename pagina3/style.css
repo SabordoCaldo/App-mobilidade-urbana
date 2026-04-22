@@ -109,7 +109,7 @@ label{
   height:120px;
   margin:0 auto 10px;
   border-radius:16px;
-  overflow:hidden;
+  overflow:visible; /* 🔥 CORREÇÃO DO CROP */
   border:2px solid #FFD600;
   background:#ddd;
   box-shadow:0 4px 10px rgba(0,0,0,0.1);
@@ -157,7 +157,8 @@ label{
   display:none;
 }
 
+/* CROPPER (CAIXA VISÍVEL) */
 .cropper-view-box,
-.cropper-face {
-  border: 2px solid #FFD600;
+.cropper-face{
+  border:2px solid #FFD600;
 }
