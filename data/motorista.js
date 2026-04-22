@@ -1,16 +1,27 @@
-// LISTA DE MOTORISTAS
+/* =========================
+   LISTAR MOTORISTAS
+========================= */
 function getMotoristas(){
   const dados = localStorage.getItem("motoristas");
   return dados ? JSON.parse(dados) : [];
 }
 
 
-// SALVAR MOTORISTA
+/* =========================
+   SALVAR NOVO MOTORISTA
+========================= */
 function salvarMotorista(novoMotorista){
 
   const motoristas = getMotoristas();
 
-  motoristas.push({
+  // 🚨 EVITAR DUPLICIDADE (telefone)
+  const existe = motoristas.find(m => m.telefone === novoMotorista.telefone);
+  if(existe){
+    alert("Já existe um motorista com esse telefone");
+    return false;
+  }
+
+  const motorista = {
     id: Date.now(),
 
     // DADOS PESSOAIS
@@ -24,7 +35,7 @@ function salvarMotorista(novoMotorista){
     fotoPerfil: novoMotorista.fotoPerfil,
     fotoCNH: novoMotorista.fotoCNH,
 
-    // DADOS VEÍCULO (página 5 depois)
+    // DADOS DO VEÍCULO (preenchido na página 5)
     placa: "",
     modelo: "",
     cor: "",
@@ -32,23 +43,43 @@ function salvarMotorista(novoMotorista){
     fotoCRLV: "",
 
     // STATUS
-    status: "pendente", // pode ser: pendente, aprovado, bloqueado
+    status: "pendente", // pendente | aprovado | bloqueado
 
     criadoEm: new Date().toISOString()
-  });
+  };
+
+  motoristas.push(motorista);
 
   localStorage.setItem("motoristas", JSON.stringify(motoristas));
+
+  // 🔥 SALVA ID ATUAL (para página 5)
+  localStorage.setItem("motoristaAtualId", motorista.id);
+
+  return true;
 }
 
 
-// BUSCAR MOTORISTA POR TELEFONE
+/* =========================
+   BUSCAR POR TELEFONE
+========================= */
 function buscarMotorista(telefone){
   const motoristas = getMotoristas();
   return motoristas.find(m => m.telefone === telefone);
 }
 
 
-// ATUALIZAR MOTORISTA (usado na página 5)
+/* =========================
+   BUSCAR POR ID
+========================= */
+function getMotoristaPorId(id){
+  const motoristas = getMotoristas();
+  return motoristas.find(m => m.id === id);
+}
+
+
+/* =========================
+   ATUALIZAR MOTORISTA
+========================= */
 function atualizarMotorista(id, dadosAtualizados){
 
   const motoristas = getMotoristas();
@@ -64,10 +95,29 @@ function atualizarMotorista(id, dadosAtualizados){
 }
 
 
-// REMOVER MOTORISTA (opcional)
+/* =========================
+   MOTORISTA ATUAL (FLUXO)
+========================= */
+function getMotoristaAtualId(){
+  return localStorage.getItem("motoristaAtualId");
+}
+
+
+/* =========================
+   LIMPAR MOTORISTA ATUAL
+========================= */
+function limparMotoristaAtual(){
+  localStorage.removeItem("motoristaAtualId");
+}
+
+
+/* =========================
+   REMOVER MOTORISTA
+========================= */
 function removerMotorista(id){
 
   const motoristas = getMotoristas();
+
   const filtrados = motoristas.filter(m => m.id !== id);
 
   localStorage.setItem("motoristas", JSON.stringify(filtrados));
