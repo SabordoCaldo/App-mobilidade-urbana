@@ -10,12 +10,19 @@ body{
   max-width:380px;
   margin:auto;
   padding:20px;
-  text-align:center; /* melhora alinhamento */
 }
 
 /* TÍTULO */
 h1{
   text-align:center;
+}
+
+/* LABEL (SUBTÍTULOS) */
+label{
+  display:block;
+  text-align:left;
+  margin-bottom:5px;
+  font-weight:bold;
 }
 
 /* INPUT */
@@ -25,7 +32,7 @@ h1{
   border-radius:12px;
   padding:12px;
   margin-bottom:15px;
-  text-align:left; /* mantém inputs alinhados */
+  text-align:left;
 }
 
 .input-box input{
@@ -35,7 +42,7 @@ h1{
   background:none;
 }
 
-/* BOTÃO */
+/* BOTÃO PRINCIPAL */
 .btn{
   width:100%;
   padding:15px;
@@ -45,7 +52,11 @@ h1{
   font-weight:bold;
 }
 
-/* OLHO */
+.btn:active{
+  transform:scale(0.97);
+}
+
+/* OLHO (IGUAL PÁGINA 1) */
 .eye{
   position:absolute;
   right:10px;
@@ -61,15 +72,14 @@ h1{
   height:100%;
 }
 
-.eye path,
-.eye circle{
+.eye path{
   stroke:#777;
   stroke-width:2;
   fill:none;
 }
 
-.eye.off path,
-.eye.off circle{
+/* OLHO COM X */
+.eye.off path{
   stroke:red;
 }
 
@@ -98,11 +108,11 @@ h1{
   width:120px;
   height:120px;
   margin:0 auto 10px;
-  border-radius:16px; /* mais moderno */
+  border-radius:16px;
   overflow:hidden;
   border:2px solid #FFD600;
   background:#eee;
-  box-shadow:0 4px 10px rgba(0,0,0,0.1); /* profundidade */
+  box-shadow:0 4px 10px rgba(0,0,0,0.1);
 }
 
 .foto-container img{
@@ -125,75 +135,10 @@ h1{
 }
 
 .btn-foto:active{
-  transform:scale(0.96); /* efeito clique */
+  transform:scale(0.96);
 }
 
 /* INPUT ESCONDIDO */
 #fotoInput{
   display:none;
-}
-
-/* FORÇA LABELS À ESQUERDA */
-label{
-  display:block;
-  text-align:left !important;
-}
-
-/* GARANTE INPUTS À ESQUERDA */
-.input-box{
-  text-align:left !important;
-}
-
-/* REMOVE CENTRALIZAÇÃO DOS CAMPOS */
-.conteudo{
-  text-align:left;
-}
-
-/* MANTÉM ELEMENTOS ESPECÍFICOS CENTRALIZADOS */
-h1,
-.foto-container,
-.btn-foto,
-.voltar{
-  text-align:center;
-}
-
-/* OLHO */
-.eye{
-  position:absolute;
-  right:10px;
-  top:50%;
-  transform:translateY(-50%);
-  width:22px;
-  height:22px;
-  cursor:pointer;
-}
-
-.eye svg{
-  width:100%;
-  height:100%;
-}
-
-/* OLHO NORMAL (CINZA) */
-.eye path,
-.eye circle{
-  stroke:#777;
-  stroke-width:2;
-  fill:none;
-}
-
-/* OLHO COM X (ESCONDER) */
-.eye.off path,
-.eye.off circle{
-  stroke:#777; /* mantém cinza */
-}
-
-.eye.off::after{
-  content:"";
-  position:absolute;
-  width:22px;
-  height:2px;
-  background:red;
-  top:50%;
-  left:0;
-  transform:rotate(45deg);
 }
