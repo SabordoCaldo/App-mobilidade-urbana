@@ -58,5 +58,33 @@ function toggleSenha(id, el){
 
 /* CADASTRO */
 function cadastrar(){
-  alert("Cadastro funcionando 🚀");
+
+  const nome = document.getElementById("nome").value.trim();
+  const telefone = document.getElementById("telefone").value.trim();
+  const endereco = document.getElementById("endereco").value.trim();
+  const senha = document.getElementById("senha").value;
+  const confirmar = document.getElementById("confirmar").value;
+
+  const preview = document.getElementById("preview").src;
+
+  // 🚨 VALIDA FOTO
+  if(preview.includes("avatar-padrao")){
+    return alert("Adicione uma foto de perfil");
+  }
+
+  if(!nome) return alert("Digite seu nome");
+  if(!telefone) return alert("Digite seu telefone");
+  if(!endereco) return alert("Digite seu endereço");
+  if(senha.length < 4) return alert("Senha mínimo 4 dígitos");
+  if(senha !== confirmar) return alert("Senhas não coincidem");
+
+  salvarCliente({
+    nome,
+    telefone,
+    endereco,
+    senha,
+    foto: preview
+  });
+
+  alert("Cadastro concluido con sucesso🚀");
 }
