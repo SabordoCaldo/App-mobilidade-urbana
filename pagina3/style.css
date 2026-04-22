@@ -132,3 +132,27 @@ h1{
 #fotoInput{
   display:none;
 }
+
+/* FORÇA LABELS À ESQUERDA */
+label{
+  display:block;
+  text-align:left !important;
+}
+
+/* GARANTE INPUTS À ESQUERDA */
+.input-box{
+  text-align:left !important;
+}
+
+/* REMOVE CENTRALIZAÇÃO DOS CAMPOS */
+.conteudo{
+  text-align:left;
+}
+
+/* MANTÉM ELEMENTOS ESPECÍFICOS CENTRALIZADOS */
+h1,
+.foto-container,
+.btn-foto,
+.voltar{
+  text-align:center;
+}
