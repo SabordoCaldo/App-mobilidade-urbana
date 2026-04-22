@@ -1,118 +1,40 @@
-/* BASE */
 body{
   margin:0;
   font-family:Arial;
-  background:#ffffff;
 }
 
-/* CONTEÚDO */
 .conteudo{
   max-width:380px;
   margin:auto;
   padding:20px;
 }
 
-/* TÍTULO */
 h1{
   text-align:center;
 }
 
-/* LABEL */
-label{
-  display:block;
-  text-align:left;
-  margin-bottom:5px;
-  font-weight:bold;
-}
-
-/* INPUT */
 .input-box{
-  position:relative;
   background:#eee;
-  border-radius:12px;
   padding:12px;
+  border-radius:12px;
   margin-bottom:15px;
 }
 
-.input-box input{
-  width:100%;
-  border:none;
-  outline:none;
-  background:none;
-}
-
-/* BOTÃO PRINCIPAL */
 .btn{
   width:100%;
   padding:15px;
   border:none;
   border-radius:25px;
   background:#FFD600;
-  font-weight:bold;
 }
 
-.btn:active{
-  transform:scale(0.97);
-}
-
-/* OLHO */
-.eye{
-  position:absolute;
-  right:10px;
-  top:50%;
-  transform:translateY(-50%);
-  width:20px;
-  height:20px;
-  cursor:pointer;
-}
-
-.eye svg{
-  width:100%;
-  height:100%;
-}
-
-.eye path{
-  stroke:#777;
-  stroke-width:2;
-  fill:none;
-}
-
-/* OLHO ATIVO */
-.eye.off path{
-  stroke:red;
-}
-
-.eye.off::after{
-  content:"";
-  position:absolute;
-  width:20px;
-  height:2px;
-  background:red;
-  transform:rotate(45deg);
-  top:50%;
-  left:0;
-}
-
-/* VOLTAR */
-.voltar{
-  display:block;
-  text-align:center;
-  margin-top:15px;
-  color:#6f42c1;
-  font-weight:bold;
-}
-
-/* FOTO */
 .foto-container{
-  position:relative;
   width:120px;
   height:120px;
-  margin:0 auto 10px;
+  margin:auto;
   border-radius:16px;
-  overflow:visible; /* 🔥 CORREÇÃO DO CROP */
+  overflow:hidden;
   border:2px solid #FFD600;
-  background:#ddd;
-  box-shadow:0 4px 10px rgba(0,0,0,0.1);
 }
 
 .foto-container img{
@@ -121,44 +43,42 @@ label{
   object-fit:cover;
 }
 
-/* BOTÃO CONFIRMAR (✔) */
-.btn-confirmar{
-  position:absolute;
-  bottom:5px;
-  right:5px;
-  width:35px;
-  height:35px;
-  border:none;
-  border-radius:50%;
-  background:#FFD600;
-  font-weight:bold;
-  cursor:pointer;
-  display:none;
-}
-
-/* BOTÃO FOTO */
 .btn-foto{
   display:block;
-  margin:10px auto 20px;
-  padding:10px 18px;
+  margin:10px auto;
+  padding:10px 15px;
   border:none;
-  border-radius:25px;
+  border-radius:20px;
   background:#FFD600;
-  font-weight:bold;
-  cursor:pointer;
 }
 
-.btn-foto:active{
-  transform:scale(0.96);
-}
-
-/* INPUT ESCONDIDO */
 #fotoInput{
   display:none;
 }
 
-/* CROPPER (CAIXA VISÍVEL) */
-.cropper-view-box,
-.cropper-face{
-  border:2px solid #FFD600;
+/* 🔥 MODAL CROP */
+.modal-crop{
+  position:fixed;
+  top:0;
+  left:0;
+  width:100%;
+  height:100%;
+  background:#000;
+  display:none;
+  align-items:center;
+  justify-content:center;
+  flex-direction:column;
+}
+
+.modal-crop img{
+  max-width:90%;
+}
+
+.modal-crop button{
+  margin-top:20px;
+  padding:15px;
+  border:none;
+  border-radius:50%;
+  background:#FFD600;
+  font-size:20px;
 }
