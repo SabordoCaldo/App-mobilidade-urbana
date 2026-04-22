@@ -1,7 +1,7 @@
 let tipo = "";
 let cidadeOk = false;
 
-/* SELEÇÃO BOTÕES */
+/* SELECIONAR TIPO */
 function selecionarTipo(t){
 
   tipo = t;
@@ -59,25 +59,11 @@ function validar(){
   }
 }
 
-/* CONTINUAR */
+/* CONTINUAR (FUNCIONANDO NO GITHUB) */
 function continuar(){
 
-  // segurança extra
   if(!tipo) return alert("Selecione cliente ou motorista");
 
-  // 👉 escolha UMA das opções abaixo
-
-  // 🔹 OPÇÃO 1 (caminho relativo - funciona local)
-  if(tipo === "cliente"){
-    window.location.href = "../pagina3/";
-  }
-
-  if(tipo === "motorista"){
-    window.location.href = "../pagina4/";
-  }
-
-  // 🔹 OPÇÃO 2 (mais seguro no GitHub Pages)
-  /*
   if(tipo === "cliente"){
     window.location.href = "/App-mobilidade-urbana/pagina3/index.html";
   }
@@ -85,15 +71,15 @@ function continuar(){
   if(tipo === "motorista"){
     window.location.href = "/App-mobilidade-urbana/pagina4/index.html";
   }
-  */
+
 }
 
 /* TERMOS */
 function irTermos(){
-  window.location.href = "../pagina2/termos/termos.html";
+  window.location.href = "/App-mobilidade-urbana/pagina2/termos/termos.html";
 }
 
 /* VOLTAR */
 function voltar(){
-  window.location.href = "../pagina1/";
+  window.location.href = "/App-mobilidade-urbana/pagina1/index.html";
 }
