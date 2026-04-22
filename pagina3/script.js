@@ -1,48 +1,72 @@
+let cropper;
+
 document.addEventListener("DOMContentLoaded", function(){
 
-  /* FOTO */
   const input = document.getElementById("fotoInput");
   const preview = document.getElementById("preview");
 
-  if(input && preview){
-
-    // carregar foto salva
-    const fotoSalva = localStorage.getItem("fotoUsuario");
-    if(fotoSalva){
-      preview.src = fotoSalva;
-    }
-
-    // alterar foto
-    input.addEventListener("change", function(e){
-
-      const file = e.target.files[0];
-      if(!file) return;
-
-      const reader = new FileReader();
-
-      reader.onload = function(event){
-        const imagem = event.target.result;
-
-        preview.src = imagem;
-
-        // salvar no navegador
-        localStorage.setItem("fotoUsuario", imagem);
-      };
-
-      reader.readAsDataURL(file);
-    });
+  // carregar foto salva
+  const fotoSalva = localStorage.getItem("fotoUsuario");
+  if(fotoSalva){
+    preview.src = fotoSalva;
   }
+
+  // selecionar imagem
+  input.addEventListener("change", function(e){
+
+    const file = e.target.files[0];
+    if(!file) return;
+
+    const reader = new FileReader();
+
+    reader.onload = function(event){
+
+      preview.src = event.target.result;
+
+      if(cropper){
+        cropper.destroy();
+      }
+
+      cropper = new Cropper(preview, {
+        aspectRatio: 1,
+        viewMode: 1
+      });
+
+    };
+
+    reader.readAsDataURL(file);
+  });
 
 });
 
 
-/* ABRIR GALERIA/CÂMERA */
+/* ABRIR GALERIA */
 function abrirFoto(){
   document.getElementById("fotoInput").click();
 }
 
 
-/* OLHO (mostrar/ocultar senha) */
+/* SALVAR CORTE */
+function cortarFoto(){
+
+  if(!cropper) return;
+
+  const canvas = cropper.getCroppedCanvas({
+    width:300,
+    height:300
+  });
+
+  const imagemFinal = canvas.toDataURL("image/jpeg");
+
+  document.getElementById("preview").src = imagemFinal;
+
+  localStorage.setItem("fotoUsuario", imagemFinal);
+
+  cropper.destroy();
+}
+
+
+/* OLHO */
 function toggleSenha(id, el){
   const input = document.getElementById(id);
 
