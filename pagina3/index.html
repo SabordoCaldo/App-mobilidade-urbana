@@ -1,85 +1,117 @@
-<!DOCTYPE html>
-<html lang="pt-BR">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Cadastro Cliente</title>
+let cropper;
 
-<link rel="stylesheet" href="style.css">
+document.addEventListener("DOMContentLoaded", function(){
 
-<!-- CROP -->
-<link href="https://unpkg.com/cropperjs/dist/cropper.min.css" rel="stylesheet"/>
-<script src="https://unpkg.com/cropperjs"></script>
+  const input = document.getElementById("fotoInput");
+  const preview = document.getElementById("preview");
+  const btnConfirmar = document.getElementById("btnConfirmar");
 
-</head>
+  btnConfirmar.style.display = "none";
 
-<body>
+  const fotoSalva = localStorage.getItem("fotoUsuario");
+  if(fotoSalva){
+    preview.src = fotoSalva;
+  }
 
-<div class="conteudo">
+  input.addEventListener("change", function(e){
 
-<h1>CADASTRO CLIENTE</h1>
+    const file = e.target.files[0];
+    if(!file) return;
 
-<!-- FOTO -->
-<div class="foto-container">
-  <img id="preview" src="foto/avatar-padrao.png">
+    const reader = new FileReader();
 
-  <!-- BOTÃO CONFIRMAR -->
-  <button id="btnConfirmar" class="btn-confirmar" onclick="confirmarFoto()">✔</button>
-</div>
+    reader.onload = function(event){
 
-<!-- BOTÃO ABRIR FOTO -->
-<button class="btn-foto" onclick="abrirFoto()">Adicionar foto</button>
+      preview.src = event.target.result;
 
-<!-- INPUT OCULTO -->
-<input type="file" id="fotoInput" accept="image/*">
+      if(cropper){
+        cropper.destroy();
+      }
 
-<label>Nome</label>
-<div class="input-box">
-  <input type="text" id="nome" placeholder="Digite seu nome">
-</div>
+      cropper = new Cropper(preview, {
+        aspectRatio: 1,
+        viewMode: 1,
+        autoCropArea: 0.8,
+        movable: true,
+        zoomable: true,
+        scalable: true,
+        cropBoxMovable: true,
+        cropBoxResizable: true,
+        guides: true,
+        highlight: true,
+        background: false
+      });
 
-<label>Telefone</label>
-<div class="input-box">
-  <input type="tel" id="telefone" placeholder="(00) 00000-0000">
-</div>
+      btnConfirmar.style.display = "block";
+    };
 
-<label>Endereço</label>
-<div class="input-box">
-  <input type="text" id="endereco" placeholder="Digite seu endereço">
-</div>
+    reader.readAsDataURL(file);
+  });
 
-<label>Senha</label>
-<div class="input-box">
-  <input type="password" id="senha" placeholder="Senha">
+});
 
-  <span class="eye" onclick="toggleSenha('senha', this)">
-    <svg viewBox="0 0 24 24">
-      <path d="M1 12C3.5 7 7.5 4 12 4s8.5 3 11 8c-2.5 5-6.5 8-11 8s-8.5-3-11-8z"/>
-      <circle cx="12" cy="12" r="3"/>
-    </svg>
-  </span>
-</div>
 
-<label>Confirmar Senha</label>
-<div class="input-box">
-  <input type="password" id="confirmar" placeholder="Confirmar senha">
+function abrirFoto(){
+  document.getElementById("fotoInput").click();
+}
 
-  <span class="eye" onclick="toggleSenha('confirmar', this)">
-    <svg viewBox="0 0 24 24">
-      <path d="M1 12C3.5 7 7.5 4 12 4s8.5 3 11 8c-2.5 5-6.5 8-11 8s-8.5-3-11-8z"/>
-      <circle cx="12" cy="12" r="3"/>
-    </svg>
-  </span>
-</div>
 
-<button class="btn" onclick="cadastrar()">Cadastrar</button>
+function confirmarFoto(){
 
-<a href="../pagina2/" class="voltar">Voltar</a>
+  if(!cropper) return;
 
-</div>
+  const canvas = cropper.getCroppedCanvas({
+    width:300,
+    height:300
+  });
 
-<script src="../data/clientes.js"></script>
-<script src="script.js"></script>
+  const imagemFinal = canvas.toDataURL("image/jpeg");
 
-</body>
-</html>
+  document.getElementById("preview").src = imagemFinal;
+  localStorage.setItem("fotoUsuario", imagemFinal);
+
+  cropper.destroy();
+  cropper = null;
+
+  document.getElementById("btnConfirmar").style.display = "none";
+}
+
+
+/* OLHO */
+function toggleSenha(id, el){
+  const input = document.getElementById(id);
+
+  if(input.type === "password"){
+    input.type = "text";
+    el.classList.add("off");
+  }else{
+    input.type = "password";
+    el.classList.remove("off");
+  }
+}
+
+
+/* CADASTRO */
+function cadastrar(){
+
+  const nome = document.getElementById("nome").value.trim();
+  const telefone = document.getElementById("telefone").value.trim();
+  const endereco = document.getElementById("endereco").value.trim();
+  const senha = document.getElementById("senha").value;
+  const confirmar = document.getElementById("confirmar").value;
+
+  if(!nome) return alert("Digite seu nome");
+  if(!telefone) return alert("Digite seu telefone");
+  if(!endereco) return alert("Digite seu endereço");
+  if(senha.length < 4) return alert("Senha mínimo 4 dígitos");
+  if(senha !== confirmar) return alert("Senhas não coincidem");
+
+  salvarCliente({
+    nome,
+    telefone,
+    endereco,
+    senha
+  });
+
+  alert("Cadastro salvo com sucesso 🚀");
+}
