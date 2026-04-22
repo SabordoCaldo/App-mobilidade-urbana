@@ -9,6 +9,7 @@ function selecionarTipo(t){
   const c = document.getElementById("btnCliente");
   const m = document.getElementById("btnMotorista");
 
+  // limpa classes
   c.classList.remove("btn-selecionado","btn-apagado");
   m.classList.remove("btn-selecionado","btn-apagado");
 
@@ -33,15 +34,17 @@ document.getElementById("cidade").addEventListener("change", function(){
   }else if(this.value){
     cidadeOk = false;
     alert("🚫 Serviço indisponível na sua cidade ainda");
+  }else{
+    cidadeOk = false;
   }
 
   validar();
 });
 
-/* ACEITE */
+/* ACEITE TERMOS */
 document.getElementById("aceite").addEventListener("change", validar);
 
-/* VALIDAR */
+/* VALIDAR BOTÃO */
 function validar(){
 
   const aceite = document.getElementById("aceite").checked;
@@ -56,25 +59,41 @@ function validar(){
   }
 }
 
+/* CONTINUAR */
+function continuar(){
+
+  // segurança extra
+  if(!tipo) return alert("Selecione cliente ou motorista");
+
+  // 👉 escolha UMA das opções abaixo
+
+  // 🔹 OPÇÃO 1 (caminho relativo - funciona local)
+  if(tipo === "cliente"){
+    window.location.href = "../pagina3/";
+  }
+
+  if(tipo === "motorista"){
+    window.location.href = "../pagina4/";
+  }
+
+  // 🔹 OPÇÃO 2 (mais seguro no GitHub Pages)
+  /*
+  if(tipo === "cliente"){
+    window.location.href = "/App-mobilidade-urbana/pagina3/index.html";
+  }
+
+  if(tipo === "motorista"){
+    window.location.href = "/App-mobilidade-urbana/pagina4/index.html";
+  }
+  */
+}
+
 /* TERMOS */
 function irTermos(){
-  window.location.href = ROTAS.termos;
+  window.location.href = "../pagina2/termos/termos.html";
 }
 
 /* VOLTAR */
 function voltar(){
-  window.location.href = ROTAS.login;
-}
-
-/* CONTINUAR */
-function continuar(){
-
-  if(tipo === "cliente"){
-    alert("Cadastro cliente (próxima etapa)");
-  }
-
-  if(tipo === "motorista"){
-    alert("Cadastro motorista (próxima etapa)");
-  }
-
+  window.location.href = "../pagina1/";
 }
