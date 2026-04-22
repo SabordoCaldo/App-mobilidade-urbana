@@ -156,3 +156,44 @@ h1,
 .voltar{
   text-align:center;
 }
+
+/* OLHO */
+.eye{
+  position:absolute;
+  right:10px;
+  top:50%;
+  transform:translateY(-50%);
+  width:22px;
+  height:22px;
+  cursor:pointer;
+}
+
+.eye svg{
+  width:100%;
+  height:100%;
+}
+
+/* OLHO NORMAL (CINZA) */
+.eye path,
+.eye circle{
+  stroke:#777;
+  stroke-width:2;
+  fill:none;
+}
+
+/* OLHO COM X (ESCONDER) */
+.eye.off path,
+.eye.off circle{
+  stroke:#777; /* mantém cinza */
+}
+
+.eye.off::after{
+  content:"";
+  position:absolute;
+  width:22px;
+  height:2px;
+  background:red;
+  top:50%;
+  left:0;
+  transform:rotate(45deg);
+}
