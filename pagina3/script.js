@@ -1,13 +1,3 @@
-/* FOTO */
-document.getElementById("fotoInput").addEventListener("change", function(e){
-  const file = e.target.files[0];
-  if(file){
-    const r = new FileReader();
-    r.onload = ev => document.getElementById("preview").src = ev.target.result;
-    r.readAsDataURL(file);
-  }
-});
-
 /* OLHO */
 function toggleSenha(id, el){
   const input = document.getElementById(id);
