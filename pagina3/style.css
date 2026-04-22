@@ -1,0 +1,117 @@
+/* BASE */
+body{
+  margin:0;
+  font-family:Arial;
+  background:#ffffff;
+}
+
+/* CONTEÚDO */
+.conteudo{
+  max-width:380px;
+  margin:auto;
+  padding:20px;
+}
+
+/* TÍTULO */
+h1{
+  text-align:center;
+}
+
+/* INPUT */
+.input-box{
+  position:relative;
+  background:#eee;
+  border-radius:12px;
+  padding:12px;
+  margin-bottom:15px;
+}
+
+.input-box input{
+  width:100%;
+  border:none;
+  outline:none;
+  background:none;
+}
+
+/* BOTÃO */
+.btn{
+  width:100%;
+  padding:15px;
+  border:none;
+  border-radius:25px;
+  background:#FFD600;
+  font-weight:bold;
+}
+
+/* FOTO */
+.foto{
+  position:relative;
+  width:110px;
+  height:110px;
+  margin:0 auto 20px;
+  border-radius:50%;
+  overflow:hidden;
+  background:#ddd;
+  cursor:pointer;
+}
+
+.foto img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+}
+
+.foto input{
+  position:absolute;
+  width:100%;
+  height:100%;
+  opacity:0;
+}
+
+/* OLHO (igual página 1) */
+.eye{
+  position:absolute;
+  right:10px;
+  top:50%;
+  transform:translateY(-50%);
+  width:20px;
+  height:20px;
+  cursor:pointer;
+}
+
+.eye svg{
+  width:100%;
+  height:100%;
+}
+
+.eye path,
+.eye circle{
+  stroke:#777;
+  stroke-width:2;
+  fill:none;
+}
+
+.eye.off path,
+.eye.off circle{
+  stroke:red;
+}
+
+.eye.off::after{
+  content:"";
+  position:absolute;
+  width:20px;
+  height:2px;
+  background:red;
+  transform:rotate(45deg);
+  top:50%;
+  left:0;
+}
+
+/* VOLTAR */
+.voltar{
+  display:block;
+  text-align:center;
+  margin-top:15px;
+  color:#6f42c1;
+  font-weight:bold;
+}
