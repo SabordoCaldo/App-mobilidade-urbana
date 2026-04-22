@@ -122,8 +122,20 @@ label{
 /* 🔙 VOLTAR IGUAL PÁGINA 2 */
 .voltar{
   display:block;
+  width:100%;
+  padding:15px;
+  margin-top:15px;
+
   text-align:center;
-  margin-top:15px; /* mesma distância do botão */
-  color:#6f42c1;
+  text-decoration:none;
+
+  border-radius:25px;
+  background:#eee;
+  color:#333;
   font-weight:bold;
+}
+
+/* MESMO EFEITO DO BOTÃO */
+.voltar:active{
+  transform:scale(0.97);
 }
