@@ -1,35 +1,62 @@
-/* FOTO + SALVAR */
-const inputFoto = document.getElementById("fotoInput");
-const preview = document.getElementById("preview");
+document.addEventListener("DOMContentLoaded", function(){
 
-/* CARREGAR FOTO SALVA */
-const fotoSalva = localStorage.getItem("fotoUsuario");
+  /* FOTO + SALVAR */
+  const inputFoto = document.getElementById("fotoInput");
+  const preview = document.getElementById("preview");
 
-if(fotoSalva){
-  preview.src = fotoSalva;
-}
+  /* CARREGAR FOTO SALVA */
+  const fotoSalva = localStorage.getItem("fotoUsuario");
 
-/* ALTERAR FOTO */
-inputFoto.addEventListener("change", function(e){
+  if(fotoSalva){
+    preview.src = fotoSalva;
+  }
 
-  const file = e.target.files[0];
+  /* ALTERAR FOTO */
+  if(inputFoto){
+    inputFoto.addEventListener("change", function(e){
 
-  if(file){
-    const reader = new FileReader();
+      const file = e.target.files[0];
 
-    reader.onload = function(ev){
-      const imagem = ev.target.result;
+      if(file){
+        const reader = new FileReader();
 
-      preview.src = imagem;
+        reader.onload = function(ev){
+          const imagem = ev.target.result;
 
-      // 🔥 SALVA A FOTO
-      localStorage.setItem("fotoUsuario", imagem);
-    };
+          preview.src = imagem;
 
-    reader.readAsDataURL(file);
+          localStorage.setItem("fotoUsuario", imagem);
+        };
+
+        reader.readAsDataURL(file);
+      }
+
+    });
+  }
+
+  /* TELEFONE */
+  const telefoneInput = document.getElementById("telefone");
+
+  if(telefoneInput){
+    telefoneInput.addEventListener("input", function(e){
+      let v = e.target.value.replace(/\D/g,"");
+
+      if(v.length > 11) v = v.slice(0,11);
+
+      if(v.length > 6){
+        v = v.replace(/^(\d{2})(\d{5})(\d{0,4})$/, "($1) $2-$3");
+      } else if(v.length > 2){
+        v = v.replace(/^(\d{2})(\d{0,5})$/, "($1) $2");
+      } else{
+        v = v.replace(/^(\d*)$/, "($1");
+      }
+
+      e.target.value = v;
+    });
   }
 
 });
+
 
 /* OLHO */
 function toggleSenha(id, el){
@@ -44,22 +71,6 @@ function toggleSenha(id, el){
   }
 }
 
-/* TELEFONE */
-document.getElementById("telefone").addEventListener("input", function(e){
-  let v = e.target.value.replace(/\D/g,"");
-
-  if(v.length > 11) v = v.slice(0,11);
-
-  if(v.length > 6){
-    v = v.replace(/^(\d{2})(\d{5})(\d{0,4})$/, "($1) $2-$3");
-  } else if(v.length > 2){
-    v = v.replace(/^(\d{2})(\d{0,5})$/, "($1) $2");
-  } else{
-    v = v.replace(/^(\d*)$/, "($1");
-  }
-
-  e.target.value = v;
-});
 
 /* CADASTRO */
 function cadastrar(){
