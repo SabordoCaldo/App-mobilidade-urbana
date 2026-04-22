@@ -51,8 +51,10 @@ h1{
   margin:0 auto 20px;
   border-radius:50%;
   overflow:hidden;
-  background:#ddd;
-  cursor:pointer;
+  background:#eee;
+
+  /* 👇 BORDA ESTILO APP */
+  border:3px solid #FFD600;
 }
 
 .foto img{
