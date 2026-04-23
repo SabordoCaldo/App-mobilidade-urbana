@@ -71,13 +71,20 @@ function cadastrarMotorista(){
   const fotoPerfil = localStorage.getItem("fotoMotoristaPerfil");
   const fotoCNH = localStorage.getItem("fotoMotoristaCNH");
 
+  // FOTO
   if(!fotoPerfil) return alert("Adicione a foto de perfil");
   if(!fotoCNH) return alert("Adicione a foto da CNH");
 
+  // CAMPOS
   if(!nome) return alert("Digite seu nome");
   if(!telefone) return alert("Digite seu telefone");
   if(!endereco) return alert("Digite seu endereço");
-  if(!cnh) return alert("Digite o número da CNH");
+
+  // 🚨 VALIDAÇÃO CNH
+  if(!/^\d{11}$/.test(cnh)){
+    return alert("A CNH deve ter 11 números");
+  }
+
   if(senha.length < 4) return alert("Senha mínimo 4 dígitos");
   if(senha !== confirmar) return alert("Senhas não coincidem");
 
