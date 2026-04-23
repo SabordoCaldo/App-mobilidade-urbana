@@ -22,10 +22,11 @@ carregarClientes();
 ========================= */
 function salvarCliente(cliente){
 
-  // 🚨 evitar duplicidade por telefone
+  // 🚨 TELEFONE DUPLICADO
   const existe = clientes.find(c => c.telefone === cliente.telefone);
+
   if(existe){
-    alert("Já existe um cliente com esse telefone");
+    alert("Esse número já está cadastrado");
     return false;
   }
 
@@ -38,8 +39,7 @@ function salvarCliente(cliente){
     senha: cliente.senha,
     foto: cliente.foto || "",
 
-    status: "ativo", // ativo | bloqueado
-
+    status: "ativo",
     criadoEm: new Date().toISOString()
   };
 
@@ -79,11 +79,7 @@ function atualizarCliente(id, dadosAtualizados){
    BLOQUEAR CLIENTE
 ========================= */
 function bloquearCliente(id){
-
-  atualizarCliente(id, {
-    status: "bloqueado"
-  });
-
+  atualizarCliente(id, { status: "bloqueado" });
 }
 
 
