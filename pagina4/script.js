@@ -43,6 +43,5 @@ function cadastrarMotorista(){
   if(!sucesso) return;
 
   // SUCESSO
-  alert("Dados salvos! Continue para o veículo 🚗");
-  window.location.href = "../pagina5/";
-}
+  alert("Quase lá! 🚗\nAgora complete os dados do veículo.");
+  }
