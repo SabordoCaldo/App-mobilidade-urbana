@@ -18,40 +18,44 @@ carregarMotoristas();
 
 
 /* =========================
-   SALVAR MOTORISTA (PÁGINA 4)
+   SALVAR MOTORISTA
 ========================= */
 function salvarMotorista(motorista){
 
-  // 🚨 evitar duplicidade
-  const existe = motoristas.find(m => m.telefone === motorista.telefone);
-  if(existe){
-    alert("Já existe um motorista com esse telefone");
+  // 🚨 TELEFONE DUPLICADO
+  const telefoneExiste = motoristas.find(m => m.telefone === motorista.telefone);
+  if(telefoneExiste){
+    alert("Esse número já está cadastrado");
+    return false;
+  }
+
+  // 🚨 CNH DUPLICADA
+  const cnhExiste = motoristas.find(m => m.cnh === motorista.cnh);
+  if(cnhExiste){
+    alert("Essa CNH já está cadastrada");
     return false;
   }
 
   const novoMotorista = {
     id: Date.now(),
 
-    // DADOS PESSOAIS
     nome: motorista.nome,
     telefone: motorista.telefone,
     endereco: motorista.endereco,
     cnh: motorista.cnh,
     senha: motorista.senha,
 
-    // IMAGENS
     fotoPerfil: motorista.fotoPerfil || "",
     fotoCNH: motorista.fotoCNH || "",
 
-    // DADOS VEÍCULO (página 5)
+    // VEÍCULO (página 5)
     placa: "",
     modelo: "",
     cor: "",
     renavan: "",
     fotoCRLV: "",
 
-    // CONTROLE
-    status: "pendente", // pendente | aprovado | bloqueado
+    status: "pendente",
     criadoEm: new Date().toISOString()
   };
 
@@ -59,7 +63,7 @@ function salvarMotorista(motorista){
 
   localStorage.setItem("motoristas", JSON.stringify(motoristas));
 
-  // salva ID atual (fluxo para página 5)
+  // fluxo página 5
   localStorage.setItem("motoristaAtualId", novoMotorista.id);
 
   return true;
@@ -83,7 +87,7 @@ function getMotoristaPorId(id){
 
 
 /* =========================
-   ATUALIZAR MOTORISTA (PÁGINA 5)
+   ATUALIZAR MOTORISTA
 ========================= */
 function atualizarMotorista(id, dadosAtualizados){
 
@@ -102,11 +106,7 @@ function atualizarMotorista(id, dadosAtualizados){
    BLOQUEAR MOTORISTA
 ========================= */
 function bloquearMotorista(id){
-
-  atualizarMotorista(id, {
-    status: "bloqueado"
-  });
-
+  atualizarMotorista(id, { status: "bloqueado" });
 }
 
 
@@ -114,11 +114,7 @@ function bloquearMotorista(id){
    APROVAR MOTORISTA
 ========================= */
 function aprovarMotorista(id){
-
-  atualizarMotorista(id, {
-    status: "aprovado"
-  });
-
+  atualizarMotorista(id, { status: "aprovado" });
 }
 
 
@@ -134,7 +130,7 @@ function removerMotorista(id){
 
 
 /* =========================
-   MOTORISTA ATUAL (FLUXO)
+   MOTORISTA ATUAL
 ========================= */
 function getMotoristaAtualId(){
   return localStorage.getItem("motoristaAtualId");
