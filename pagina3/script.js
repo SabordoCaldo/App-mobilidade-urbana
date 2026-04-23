@@ -34,14 +34,6 @@ function abrirFoto(){
 }
 
 
-function removerFoto(){
-  const preview = document.getElementById("preview");
-
-  preview.src = "foto/avatar-padrao.png";
-  localStorage.removeItem("fotoUsuario");
-}
-
-
 /* OLHO */
 function toggleSenha(id, el){
   const input = document.getElementById(id);
@@ -64,27 +56,32 @@ function cadastrar(){
   const endereco = document.getElementById("endereco").value.trim();
   const senha = document.getElementById("senha").value;
   const confirmar = document.getElementById("confirmar").value;
+  const foto = document.getElementById("preview").src;
 
-  const preview = document.getElementById("preview").src;
-
-  // 🚨 VALIDA FOTO
-  if(preview.includes("avatar-padrao")){
+  // 🚨 FOTO OBRIGATÓRIA
+  if(foto.includes("avatar-padrao")){
     return alert("Adicione uma foto de perfil");
   }
 
+  // CAMPOS
   if(!nome) return alert("Digite seu nome");
   if(!telefone) return alert("Digite seu telefone");
   if(!endereco) return alert("Digite seu endereço");
   if(senha.length < 4) return alert("Senha mínimo 4 dígitos");
   if(senha !== confirmar) return alert("Senhas não coincidem");
 
-  salvarCliente({
+  // 🚨 SALVAR COM VALIDAÇÃO (DUPLICIDADE)
+  const sucesso = salvarCliente({
     nome,
     telefone,
     endereco,
     senha,
-    foto: preview
+    foto
   });
 
-  alert("Cadastro concluido con sucesso🚀");
+  // 🚨 SE JÁ EXISTIR, PARA AQUI
+  if(!sucesso) return;
+
+  alert("Cadastro realizado com sucesso 🚀");
+
 }
