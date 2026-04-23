@@ -88,3 +88,16 @@ select{
   font-weight:bold;
   text-align:center;
 }
+
+/* VOLTAR PADRÃO NOVO */
+.link-voltar{
+  display:inline-block;
+  margin-top:15px;
+  color:#6f42c1;
+  font-weight:bold;
+  text-decoration:none;
+}
+
+.link-voltar:active{
+  opacity:0.7;
+}
