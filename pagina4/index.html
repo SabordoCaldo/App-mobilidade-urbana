@@ -40,7 +40,7 @@
 
 <label>Número da CNH</label>
 <div class="input-box">
-  <input type="text" id="cnh">
+  <input type="tel" id="cnh" maxlength="11" inputmode="numeric" pattern="[0-9]*" placeholder="Somente números">
 </div>
 
 <label>Senha</label>
@@ -79,7 +79,7 @@
 <!-- BOTÕES -->
 <button class="btn" onclick="cadastrarMotorista()">Continuar</button>
 
-<p style="text-align:center; margin-top:15px;">
+<p style="text-align:center;">
   <a href="../pagina2/" class="link-voltar">Voltar</a>
 </p>
 
