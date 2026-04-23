@@ -1,64 +1,3 @@
-document.addEventListener("DOMContentLoaded", function(){
-
-  setupFoto("fotoPerfilInput", "previewPerfil", "fotoMotoristaPerfil");
-  setupFoto("fotoCNHInput", "previewCNH", "fotoMotoristaCNH");
-
-});
-
-
-function setupFoto(inputId, previewId, storageKey){
-
-  const input = document.getElementById(inputId);
-  const preview = document.getElementById(previewId);
-
-  const salva = localStorage.getItem(storageKey);
-  if(salva){
-    preview.src = salva;
-  }
-
-  input.addEventListener("change", function(e){
-
-    const file = e.target.files[0];
-    if(!file) return;
-
-    const reader = new FileReader();
-
-    reader.onload = function(event){
-      const img = event.target.result;
-
-      preview.src = img;
-      localStorage.setItem(storageKey, img);
-    };
-
-    reader.readAsDataURL(file);
-  });
-}
-
-
-function abrirFoto(tipo){
-  if(tipo === "perfil"){
-    document.getElementById("fotoPerfilInput").click();
-  }else{
-    document.getElementById("fotoCNHInput").click();
-  }
-}
-
-
-/* OLHO */
-function toggleSenha(id, el){
-  const input = document.getElementById(id);
-
-  if(input.type === "password"){
-    input.type = "text";
-    el.classList.add("off");
-  }else{
-    input.type = "password";
-    el.classList.remove("off");
-  }
-}
-
-
-/* CADASTRO */
 function cadastrarMotorista(){
 
   const nome = document.getElementById("nome").value.trim();
@@ -71,23 +10,25 @@ function cadastrarMotorista(){
   const fotoPerfil = localStorage.getItem("fotoMotoristaPerfil");
   const fotoCNH = localStorage.getItem("fotoMotoristaCNH");
 
-  // FOTO
+  // 🚨 FOTO
   if(!fotoPerfil) return alert("Adicione a foto de perfil");
   if(!fotoCNH) return alert("Adicione a foto da CNH");
 
-  // CAMPOS
+  // 🚨 CAMPOS
   if(!nome) return alert("Digite seu nome");
   if(!telefone) return alert("Digite seu telefone");
   if(!endereco) return alert("Digite seu endereço");
 
-  // 🚨 VALIDAÇÃO CNH
+  // 🚨 CNH (11 números)
   if(!/^\d{11}$/.test(cnh)){
     return alert("A CNH deve ter 11 números");
   }
 
+  // 🚨 SENHA
   if(senha.length < 4) return alert("Senha mínimo 4 dígitos");
   if(senha !== confirmar) return alert("Senhas não coincidem");
 
+  // 🚨 SALVAR (COM BLOQUEIO DE DUPLICIDADE)
   const sucesso = salvarMotorista({
     nome,
     telefone,
@@ -98,9 +39,10 @@ function cadastrarMotorista(){
     fotoCNH
   });
 
-  if(sucesso){
-    alert("Dados salvos! Continue para o veículo 🚗");
-    window.location.href = "../pagina5/";
-  }
+  // 🚨 SE JÁ EXISTIR, PARA AQUI
+  if(!sucesso) return;
 
+  // SUCESSO
+  alert("Dados salvos! Continue para o veículo 🚗");
+  window.location.href = "../pagina5/";
 }
