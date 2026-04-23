@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cadastro do Veículo</title>
+
+<link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<div class="conteudo">
+
+<h1>CADASTRO DO VEÍCULO</h1>
+
+<!-- FOTO MOTO -->
+<div class="foto-container">
+  <img id="previewVeiculo" src="foto/veiculo-padrao.png">
+</div>
+
+<button class="btn-foto" onclick="abrirFotoVeiculo()">Adicionar foto da moto</button>
+<input type="file" id="fotoVeiculoInput" accept="image/*">
+
+<!-- CAMPOS -->
+<label>Placa</label>
+<div class="input-box">
+  <input type="text" id="placa">
+</div>
+
+<label>Modelo</label>
+<div class="input-box">
+  <input type="text" id="modelo">
+</div>
+
+<label>Cor</label>
+<div class="input-box">
+  <input type="text" id="cor">
+</div>
+
+<label>Ano</label>
+<div class="input-box">
+  <input type="number" id="ano">
+</div>
+
+<label>RENAVAN</label>
+<div class="input-box">
+  <input type="tel" id="renavan" maxlength="11">
+</div>
+
+<!-- FOTO CRLV -->
+<label>Foto do CRLV</label>
+<div class="cnh-container">
+  <img id="previewCRLV" src="foto/crlv-padrao.png">
+</div>
+
+<button class="btn-foto" onclick="abrirFotoCRLV()">Adicionar foto do CRLV</button>
+<input type="file" id="fotoCRLVInput" accept="image/*">
+
+<!-- BOTÃO -->
+<button class="btn" onclick="salvarVeiculo()">Finalizar cadastro</button>
+
+<p style="text-align:center;">
+  <a href="../pagina4/" class="link-voltar">Voltar</a>
+</p>
+
+</div>
+
+<script src="../data/motoristas.js"></script>
+<script src="script.js"></script>
+
+</body>
+</html>
