@@ -25,7 +25,6 @@ function salvarMotorista(motorista){
     fotoPerfil: motorista.fotoPerfil || "",
     fotoCNH: motorista.fotoCNH || "",
 
-    // veículo depois
     placa: "",
     modelo: "",
     cor: "",
