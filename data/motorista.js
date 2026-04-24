@@ -1,4 +1,10 @@
 /* =========================
+   CONFIG
+========================= */
+const MODO_DEV = true; // 🔥 true = não bloqueia duplicado
+
+
+/* =========================
    LISTA DE MOTORISTAS
 ========================= */
 let motoristas = [];
@@ -22,18 +28,21 @@ carregarMotoristas();
 ========================= */
 function salvarMotorista(motorista){
 
-  // 🚨 TELEFONE DUPLICADO
-  const telefoneExiste = motoristas.find(m => m.telefone === motorista.telefone);
-  if(telefoneExiste){
-    alert("Esse número já está cadastrado");
-    return false;
-  }
+  // 🚨 BLOQUEIO (SÓ EM PRODUÇÃO)
+  if(!MODO_DEV){
 
-  // 🚨 CNH DUPLICADA
-  const cnhExiste = motoristas.find(m => m.cnh === motorista.cnh);
-  if(cnhExiste){
-    alert("Essa CNH já está cadastrada");
-    return false;
+    const telefoneExiste = motoristas.find(m => m.telefone === motorista.telefone);
+    if(telefoneExiste){
+      alert("Esse número já está cadastrado");
+      return false;
+    }
+
+    const cnhExiste = motoristas.find(m => m.cnh === motorista.cnh);
+    if(cnhExiste){
+      alert("Essa CNH já está cadastrada");
+      return false;
+    }
+
   }
 
   const novoMotorista = {
@@ -114,9 +123,7 @@ function bloquearMotorista(id){
    REMOVER
 ========================= */
 function removerMotorista(id){
-
   motoristas = motoristas.filter(m => m.id !== id);
-
   localStorage.setItem("motoristas", JSON.stringify(motoristas));
 }
 
@@ -172,4 +179,4 @@ function getMotoristaAtualId(){
 
 function limparMotoristaAtual(){
   localStorage.removeItem("motoristaAtualId");
-    }
+}
