@@ -112,5 +112,4 @@ function cadastrarMotorista(){
   alert("Quase lá! 🚗\nAgora complete os dados do veículo.");
 
   // REDIRECIONAR
-  window.location.href = "../pagina5/";
-}
+  window.location.href = "../pagina5/index.html";
