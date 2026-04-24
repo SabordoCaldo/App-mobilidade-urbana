@@ -1,22 +1,14 @@
+let fotoPerfilOK = false;
+let fotoCNHOK = false;
+
 document.addEventListener("DOMContentLoaded", function(){
 
-  setupFoto("fotoPerfilInput", "previewPerfil", "fotoMotoristaPerfil");
-  setupFoto("fotoCNHInput", "previewCNH", "fotoMotoristaCNH");
+  const btn = document.querySelector(".btn");
+  btn.disabled = true;
+  btn.style.background = "#f7e27a";
 
-});
-
-
-function setupFoto(inputId, previewId, storageKey){
-
-  const input = document.getElementById(inputId);
-  const preview = document.getElementById(previewId);
-
-  const salva = localStorage.getItem(storageKey);
-  if(salva){
-    preview.src = salva;
-  }
-
-  input.addEventListener("change", function(e){
+  // FOTO PERFIL
+  document.getElementById("fotoPerfilInput").addEventListener("change", function(e){
 
     const file = e.target.files[0];
     if(!file) return;
@@ -24,13 +16,40 @@ function setupFoto(inputId, previewId, storageKey){
     const reader = new FileReader();
 
     reader.onload = function(event){
-      preview.src = event.target.result;
-      localStorage.setItem(storageKey, event.target.result);
+      document.getElementById("previewPerfil").src = event.target.result;
+      fotoPerfilOK = true;
+      validar();
     };
 
     reader.readAsDataURL(file);
   });
-}
+
+  // FOTO CNH
+  document.getElementById("fotoCNHInput").addEventListener("change", function(e){
+
+    const file = e.target.files[0];
+    if(!file) return;
+
+    const reader = new FileReader();
+
+    reader.onload = function(event){
+      document.getElementById("previewCNH").src = event.target.result;
+      fotoCNHOK = true;
+      validar();
+    };
+
+    reader.readAsDataURL(file);
+  });
+
+  // CAMPOS
+  ["nome","telefone","endereco","cnh","senha","confirmar"].forEach(id=>{
+    document.getElementById(id).addEventListener("input", validar);
+  });
+
+  // TELEFONE
+  document.getElementById("telefone").addEventListener("input", formatarTelefone);
+
+});
 
 
 function abrirFoto(tipo){
@@ -43,46 +62,85 @@ function abrirFoto(tipo){
 }
 
 
-function cadastrarMotorista(){
+function formatarTelefone(e){
 
-  const nome = document.getElementById("nome").value.trim();
-  const telefone = document.getElementById("telefone").value.trim();
-  const endereco = document.getElementById("endereco").value.trim();
-  const cnh = document.getElementById("cnh").value.trim();
+  let v = e.target.value.replace(/\D/g, "");
+
+  if(v.length > 11) v = v.slice(0,11);
+
+  if(v.length > 6){
+    v = `(${v.slice(0,2)}) ${v.slice(2,7)}-${v.slice(7)}`;
+  }else if(v.length > 2){
+    v = `(${v.slice(0,2)}) ${v.slice(2)}`;
+  }
+
+  e.target.value = v;
+}
+
+
+function validar(){
+
+  let ok = true;
+
+  const nome = nomeVal("nome");
+  const telefone = nomeVal("telefone");
+  const endereco = nomeVal("endereco");
+  const cnh = document.getElementById("cnh").value;
   const senha = document.getElementById("senha").value;
   const confirmar = document.getElementById("confirmar").value;
 
-  const fotoPerfil = localStorage.getItem("fotoMotoristaPerfil");
-  const fotoCNH = localStorage.getItem("fotoMotoristaCNH");
+  if(!nome || !telefone || !endereco) ok = false;
 
-  if(!fotoPerfil) return alert("Adicione a foto de perfil");
-  if(!fotoCNH) return alert("Adicione a foto da CNH");
+  // CNH 11 dígitos
+  if(!/^\d{11}$/.test(cnh)) ok = false;
 
-  if(!nome) return alert("Digite seu nome");
-  if(!telefone) return alert("Digite seu telefone");
-  if(!endereco) return alert("Digite seu endereço");
+  // SENHA
+  if(senha.length < 4) ok = false;
 
-  if(!/^\d{11}$/.test(cnh)){
-    return alert("A CNH deve ter 11 números");
-  }
-
-  if(senha.length < 4) return alert("Senha mínimo 4 dígitos");
-  if(senha !== confirmar) return alert("Senhas não coincidem");
-
-  const sucesso = salvarMotorista({
-    nome,
-    telefone,
-    endereco,
-    cnh,
-    senha,
-    fotoPerfil,
-    fotoCNH
-  });
-
-  if(sucesso){
-    alert("Quase lá! 🚗\nAgora complete os dados do veículo.");
-    window.location.href = "../pagina5/index.html";
+  // CONFIRMAÇÃO
+  if(confirmar && senha !== confirmar){
+    ok = false;
+    document.getElementById("confirmar").style.border = "2px solid red";
   }else{
-    alert("Erro ao cadastrar");
+    document.getElementById("confirmar").style.border = "none";
   }
+
+  if(!fotoPerfilOK || !fotoCNHOK) ok = false;
+
+  const btn = document.querySelector(".btn");
+
+  if(ok){
+    btn.disabled = false;
+    btn.style.background = "#FFD600";
+  }else{
+    btn.disabled = true;
+    btn.style.background = "#f7e27a";
+  }
+}
+
+
+function nomeVal(id){
+  return document.getElementById(id).value.trim();
+}
+
+
+function toggleSenha(id, el){
+
+  const input = document.getElementById(id);
+
+  if(input.type === "password"){
+    input.type = "text";
+    el.style.color = "red";
+  }else{
+    input.type = "password";
+    el.style.color = "gray";
+  }
+}
+
+
+function cadastrarMotorista(){
+
+  alert("Cadastro concluído");
+
+  window.location.href = "../pagina5/index.html";
 }
