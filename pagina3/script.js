@@ -1,19 +1,14 @@
-/* CAMPOS */
-const campos = ["nome","telefone","endereco","senha","confirmar"];
 let fotoOK = false;
-
-
-/* FOTO */
-function abrirFoto(){
-  document.getElementById("fotoInput").click();
-}
 
 document.addEventListener("DOMContentLoaded", function(){
 
-  const input = document.getElementById("fotoInput");
-  const preview = document.getElementById("preview");
+  const btn = document.querySelector(".btn");
 
-  input.addEventListener("change", function(e){
+  btn.disabled = true;
+  btn.style.background = "#f7e27a"; // amarelo claro
+
+  // FOTO
+  document.getElementById("fotoInput").addEventListener("change", function(e){
 
     const file = e.target.files[0];
     if(!file) return;
@@ -21,47 +16,84 @@ document.addEventListener("DOMContentLoaded", function(){
     const reader = new FileReader();
 
     reader.onload = function(event){
-      preview.src = event.target.result;
+      document.getElementById("preview").src = event.target.result;
       fotoOK = true;
-      validarCampos();
+      validar();
     };
 
     reader.readAsDataURL(file);
   });
 
-});
-
-
-/* VALIDAÇÃO */
-campos.forEach(id=>{
-  const el = document.getElementById(id);
-  if(el){
-    el.addEventListener("input", validarCampos);
-  }
-});
-
-
-function validarCampos(){
-
-  let preenchido = true;
-
-  campos.forEach(id=>{
-    const el = document.getElementById(id);
-    if(!el || !el.value.trim()){
-      preenchido = false;
-    }
+  // CAMPOS
+  ["nome","telefone","endereco","senha","confirmar"].forEach(id=>{
+    document.getElementById(id).addEventListener("input", validar);
   });
 
-  if(!fotoOK) preenchido = false;
+  // TELEFONE MÁSCARA
+  document.getElementById("telefone").addEventListener("input", formatarTelefone);
+
+});
+
+
+/* ABRIR FOTO */
+function abrirFoto(){
+  document.getElementById("fotoInput").click();
+}
+
+
+/* TELEFONE */
+function formatarTelefone(e){
+
+  let v = e.target.value.replace(/\D/g, "");
+
+  if(v.length > 11) v = v.slice(0,11);
+
+  if(v.length > 6){
+    v = `(${v.slice(0,2)}) ${v.slice(2,7)}-${v.slice(7)}`;
+  }else if(v.length > 2){
+    v = `(${v.slice(0,2)}) ${v.slice(2)}`;
+  }
+
+  e.target.value = v;
+}
+
+
+/* VALIDAR */
+function validar(){
+
+  let ok = true;
+
+  const nome = document.getElementById("nome").value.trim();
+  const telefone = document.getElementById("telefone").value.trim();
+  const endereco = document.getElementById("endereco").value.trim();
+  const senha = document.getElementById("senha").value;
+  const confirmar = document.getElementById("confirmar").value;
+
+  if(!nome || !telefone || !endereco) ok = false;
+
+  // SENHA
+  if(senha.length < 4){
+    ok = false;
+  }
+
+  // CONFIRMAÇÃO
+  if(confirmar && senha !== confirmar){
+    ok = false;
+    document.getElementById("confirmar").style.border = "2px solid red";
+  }else{
+    document.getElementById("confirmar").style.border = "none";
+  }
+
+  if(!fotoOK) ok = false;
 
   const btn = document.querySelector(".btn");
 
-  if(preenchido){
+  if(ok){
     btn.disabled = false;
-    btn.style.opacity = "1";
+    btn.style.background = "#FFD600"; // amarelo forte
   }else{
     btn.disabled = true;
-    btn.style.opacity = "0.5";
+    btn.style.background = "#f7e27a"; // amarelo claro
   }
 }
 
@@ -73,10 +105,10 @@ function toggleSenha(id, el){
 
   if(input.type === "password"){
     input.type = "text";
-    el.style.color = "red"; // 🔴 vermelho
+    el.style.color = "red"; // X vermelho
   }else{
     input.type = "password";
-    el.style.color = "gray"; // ⚪ cinza
+    el.style.color = "gray"; // olho cinza
   }
 }
 
