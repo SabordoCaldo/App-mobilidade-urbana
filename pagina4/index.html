@@ -14,12 +14,13 @@
 
 <h1>CADASTRO MOTORISTA</h1>
 
+<!-- FOTO PERFIL -->
 <div class="foto-container">
   <img id="previewPerfil" src="foto/avatar-padrao.png">
 </div>
 
 <button class="btn-foto" onclick="abrirFoto('perfil')">Adicionar foto</button>
-<input type="file" id="fotoPerfilInput" accept="image/*">
+<input type="file" id="fotoPerfilInput" accept="image/*" style="display:none;">
 
 <label>Nome</label>
 <div class="input-box">
@@ -28,7 +29,7 @@
 
 <label>Telefone</label>
 <div class="input-box">
-  <input type="tel" id="telefone">
+  <input type="tel" id="telefone" placeholder="(xx) xxxxx-xxxx">
 </div>
 
 <label>Endereço</label>
@@ -38,37 +39,50 @@
 
 <label>Número da CNH</label>
 <div class="input-box">
-  <input type="tel" id="cnh" maxlength="11" inputmode="numeric">
+  <input type="tel" id="cnh" maxlength="11" placeholder="Somente números">
 </div>
 
 <label>Senha</label>
 <div class="input-box">
-  <input type="password" id="senha">
+  <input type="password" id="senha" placeholder="mínimo 4 dígitos">
+
+  <span class="eye" onclick="toggleSenha('senha', this)">
+    <svg viewBox="0 0 24 24">
+      <path d="M1 12C3.5 7 7.5 4 12 4s8.5 3 11 8c-2.5 5-6.5 8-11 8s-8.5-3-11-8z"/>
+      <circle cx="12" cy="12" r="3"/>
+    </svg>
+  </span>
 </div>
 
 <label>Confirmar Senha</label>
 <div class="input-box">
   <input type="password" id="confirmar">
+
+  <span class="eye" onclick="toggleSenha('confirmar', this)">
+    <svg viewBox="0 0 24 24">
+      <path d="M1 12C3.5 7 7.5 4 12 4s8.5 3 11 8c-2.5 5-6.5 8-11 8s-8.5-3-11-8z"/>
+      <circle cx="12" cy="12" r="3"/>
+    </svg>
+  </span>
 </div>
 
+<!-- FOTO CNH -->
 <label>Foto da CNH</label>
 <div class="cnh-container">
   <img id="previewCNH" src="foto/cnh-padrao.png">
 </div>
 
 <button class="btn-foto" onclick="abrirFoto('cnh')">Adicionar foto da CNH</button>
-<input type="file" id="fotoCNHInput" accept="image/*">
+<input type="file" id="fotoCNHInput" accept="image/*" style="display:none;">
 
 <button class="btn" onclick="cadastrarMotorista()">Continuar</button>
 
 <p style="text-align:center;">
-  <a href="../pagina2/">Voltar</a>
+  <a href="../pagina2/" class="link-voltar">Voltar</a>
 </p>
 
 </div>
 
-<!-- 🚨 SEM ROTAS.JS -->
-<script src="../data/motoristas.js"></script>
 <script src="script.js"></script>
 
 </body>
