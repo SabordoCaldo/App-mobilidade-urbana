@@ -1,42 +1,63 @@
-/* FOTO PERFIL */
+const campos = ["nome","telefone","endereco","senha","confirmar"];
+let fotoOK = false;
+
 function abrirFoto(){
   document.getElementById("fotoInput").click();
 }
 
+document.getElementById("fotoInput").addEventListener("change", function(e){
 
-document.addEventListener("DOMContentLoaded", function(){
+  const file = e.target.files[0];
+  if(!file) return;
 
-  const input = document.getElementById("fotoInput");
-  const preview = document.getElementById("preview");
+  const reader = new FileReader();
 
-  input.addEventListener("change", function(e){
+  reader.onload = function(event){
+    document.getElementById("preview").src = event.target.result;
+    fotoOK = true;
+    validar();
+  };
 
-    const file = e.target.files[0];
-    if(!file) return;
-
-    const reader = new FileReader();
-
-    reader.onload = function(event){
-      preview.src = event.target.result;
-
-      // salva temporário (opcional)
-      localStorage.setItem("fotoCliente", event.target.result);
-    };
-
-    reader.readAsDataURL(file);
-  });
-
+  reader.readAsDataURL(file);
 });
 
 
-/* OLHO SENHA */
+campos.forEach(id=>{
+  document.getElementById(id).addEventListener("input", validar);
+});
+
+
+function validar(){
+
+  let ok = true;
+
+  campos.forEach(id=>{
+    if(!document.getElementById(id).value.trim()){
+      ok = false;
+    }
+  });
+
+  if(!fotoOK) ok = false;
+
+  const btn = document.getElementById("btnCadastrar");
+
+  if(ok){
+    btn.disabled = false;
+    btn.classList.add("ativo");
+  }else{
+    btn.disabled = true;
+    btn.classList.remove("ativo");
+  }
+}
+
+
 function toggleSenha(id, el){
 
   const input = document.getElementById(id);
 
   if(input.type === "password"){
     input.type = "text";
-    el.classList.add("off");
+    el.classList.add("off"); // fica vermelho
   }else{
     input.type = "password";
     el.classList.remove("off");
@@ -44,11 +65,9 @@ function toggleSenha(id, el){
 }
 
 
-/* BOTÃO FINALIZAR */
 function cadastrar(){
 
-  alert("Cadastro cliente funcionando 🚀");
+  alert("Seu cadastro foi concluído ✅");
 
-  // 👉 redireciona (ajusta depois)
-  window.location.href = "../pagina1/index.html";
+  window.location.href = "../pagina6/index.html";
 }
