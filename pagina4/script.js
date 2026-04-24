@@ -5,6 +5,7 @@ document.addEventListener("DOMContentLoaded", function(){
 
 });
 
+
 function setupFoto(inputId, previewId, storageKey){
 
   const input = document.getElementById(inputId);
@@ -31,6 +32,7 @@ function setupFoto(inputId, previewId, storageKey){
   });
 }
 
+
 function abrirFoto(tipo){
   if(tipo === "perfil"){
     document.getElementById("fotoPerfilInput").click();
@@ -40,9 +42,8 @@ function abrirFoto(tipo){
   }
 }
 
-function cadastrarMotorista(){
 
-  console.log("clicou continuar");
+function cadastrarMotorista(){
 
   const nome = document.getElementById("nome").value.trim();
   const telefone = document.getElementById("telefone").value.trim();
@@ -79,9 +80,9 @@ function cadastrarMotorista(){
   });
 
   if(sucesso){
-    alert("Quase lá! 🚗");
+    alert("Quase lá! 🚗\nAgora complete os dados do veículo.");
     window.location.href = "../pagina5/index.html";
   }else{
-    alert("Telefone ou CNH já cadastrados");
+    alert("Erro ao cadastrar");
   }
 }
