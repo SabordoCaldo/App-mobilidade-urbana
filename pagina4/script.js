@@ -25,10 +25,8 @@ function setupFoto(inputId, previewId, storageKey){
     const reader = new FileReader();
 
     reader.onload = function(event){
-      const img = event.target.result;
-
-      preview.src = img;
-      localStorage.setItem(storageKey, img);
+      preview.src = event.target.result;
+      localStorage.setItem(storageKey, event.target.result);
     };
 
     reader.readAsDataURL(file);
@@ -76,21 +74,18 @@ function cadastrarMotorista(){
   const fotoPerfil = localStorage.getItem("fotoMotoristaPerfil");
   const fotoCNH = localStorage.getItem("fotoMotoristaCNH");
 
-  // FOTO
+  // VALIDAÇÕES
   if(!fotoPerfil) return alert("Adicione a foto de perfil");
   if(!fotoCNH) return alert("Adicione a foto da CNH");
 
-  // CAMPOS
   if(!nome) return alert("Digite seu nome");
   if(!telefone) return alert("Digite seu telefone");
   if(!endereco) return alert("Digite seu endereço");
 
-  // CNH
   if(!/^\d{11}$/.test(cnh)){
     return alert("A CNH deve ter 11 números");
   }
 
-  // SENHA
   if(senha.length < 4) return alert("Senha mínimo 4 dígitos");
   if(senha !== confirmar) return alert("Senhas não coincidem");
 
@@ -105,12 +100,14 @@ function cadastrarMotorista(){
     fotoCNH
   });
 
-  // BLOQUEIO DUPLICADO
-  if(!sucesso) return;
+  // 🔥 NUNCA DEIXA SEM RESPOSTA
+  if(sucesso === true){
 
-  // MENSAGEM
-  alert("Quase lá! 🚗\nAgora complete os dados do veículo.");
+    alert("Quase lá! 🚗\nAgora complete os dados do veículo.");
+    window.location.href = "../pagina5/index.html";
 
-  // REDIRECIONAR
-  window.location.href = "../pagina5/index.html";
+  }else{
+
+    alert("Telefone ou CNH já cadastrados");
   }
+}
