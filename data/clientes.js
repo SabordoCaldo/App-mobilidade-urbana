@@ -31,7 +31,7 @@ function salvarCliente(cliente){
   localStorage.setItem("clientes", JSON.stringify(clientes));
   localStorage.setItem("clienteAtualId", novoCliente.id);
 
-  return true; // 🔥 sempre retorna true
+  return true; // 🔥 sempre funciona
 }
 
 
