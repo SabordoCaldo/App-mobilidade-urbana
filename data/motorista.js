@@ -5,7 +5,7 @@ let motoristas = [];
 
 
 /* =========================
-   CARREGAR MOTORISTAS
+   CARREGAR DADOS
 ========================= */
 function carregarMotoristas(){
   const dados = localStorage.getItem("motoristas");
@@ -52,7 +52,9 @@ function salvarMotorista(motorista){
     placa: "",
     modelo: "",
     cor: "",
+    ano: "",
     renavan: "",
+    fotoVeiculo: "",
     fotoCRLV: "",
 
     status: "pendente",
@@ -63,7 +65,7 @@ function salvarMotorista(motorista){
 
   localStorage.setItem("motoristas", JSON.stringify(motoristas));
 
-  // fluxo página 5
+  // guarda motorista atual (para página 5)
   localStorage.setItem("motoristaAtualId", novoMotorista.id);
 
   return true;
@@ -71,7 +73,7 @@ function salvarMotorista(motorista){
 
 
 /* =========================
-   BUSCAR MOTORISTA
+   BUSCAR POR TELEFONE
 ========================= */
 function buscarMotorista(telefone){
   return motoristas.find(m => m.telefone === telefone);
@@ -103,18 +105,18 @@ function atualizarMotorista(id, dadosAtualizados){
 
 
 /* =========================
-   BLOQUEAR MOTORISTA
-========================= */
-function bloquearMotorista(id){
-  atualizarMotorista(id, { status: "bloqueado" });
-}
-
-
-/* =========================
    APROVAR MOTORISTA
 ========================= */
 function aprovarMotorista(id){
   atualizarMotorista(id, { status: "aprovado" });
+}
+
+
+/* =========================
+   BLOQUEAR MOTORISTA
+========================= */
+function bloquearMotorista(id){
+  atualizarMotorista(id, { status: "bloqueado" });
 }
 
 
@@ -130,7 +132,53 @@ function removerMotorista(id){
 
 
 /* =========================
-   MOTORISTA ATUAL
+   LOGIN MOTORISTA
+========================= */
+function loginMotorista(telefone, senha){
+
+  const motorista = motoristas.find(m => m.telefone === telefone && m.senha === senha);
+
+  if(!motorista){
+    alert("Telefone ou senha inválidos");
+    return null;
+  }
+
+  if(motorista.status === "bloqueado"){
+    alert("Conta bloqueada");
+    return null;
+  }
+
+  if(motorista.status === "pendente"){
+    alert("Cadastro em análise");
+    return null;
+  }
+
+  localStorage.setItem("motoristaLogadoId", motorista.id);
+
+  return motorista;
+}
+
+
+/* =========================
+   MOTORISTA LOGADO
+========================= */
+function getMotoristaLogado(){
+  const id = localStorage.getItem("motoristaLogadoId");
+  if(!id) return null;
+  return getMotoristaPorId(id);
+}
+
+
+/* =========================
+   LOGOUT
+========================= */
+function logoutMotorista(){
+  localStorage.removeItem("motoristaLogadoId");
+}
+
+
+/* =========================
+   FLUXO CADASTRO (PÁG 5)
 ========================= */
 function getMotoristaAtualId(){
   return localStorage.getItem("motoristaAtualId");
