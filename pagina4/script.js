@@ -113,3 +113,4 @@ function cadastrarMotorista(){
 
   // REDIRECIONAR
   window.location.href = "../pagina5/index.html";
+}
