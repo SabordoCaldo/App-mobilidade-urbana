@@ -1,73 +1,90 @@
+/* CAMPOS */
 const campos = ["nome","telefone","endereco","senha","confirmar"];
 let fotoOK = false;
 
+
+/* FOTO */
 function abrirFoto(){
   document.getElementById("fotoInput").click();
 }
 
-document.getElementById("fotoInput").addEventListener("change", function(e){
+document.addEventListener("DOMContentLoaded", function(){
 
-  const file = e.target.files[0];
-  if(!file) return;
+  const input = document.getElementById("fotoInput");
+  const preview = document.getElementById("preview");
 
-  const reader = new FileReader();
+  input.addEventListener("change", function(e){
 
-  reader.onload = function(event){
-    document.getElementById("preview").src = event.target.result;
-    fotoOK = true;
-    validar();
-  };
+    const file = e.target.files[0];
+    if(!file) return;
 
-  reader.readAsDataURL(file);
+    const reader = new FileReader();
+
+    reader.onload = function(event){
+      preview.src = event.target.result;
+      fotoOK = true;
+      validarCampos();
+    };
+
+    reader.readAsDataURL(file);
+  });
+
 });
 
 
+/* VALIDAÇÃO */
 campos.forEach(id=>{
-  document.getElementById(id).addEventListener("input", validar);
+  const el = document.getElementById(id);
+  if(el){
+    el.addEventListener("input", validarCampos);
+  }
 });
 
 
-function validar(){
+function validarCampos(){
 
-  let ok = true;
+  let preenchido = true;
 
   campos.forEach(id=>{
-    if(!document.getElementById(id).value.trim()){
-      ok = false;
+    const el = document.getElementById(id);
+    if(!el || !el.value.trim()){
+      preenchido = false;
     }
   });
 
-  if(!fotoOK) ok = false;
+  if(!fotoOK) preenchido = false;
 
-  const btn = document.getElementById("btnCadastrar");
+  const btn = document.querySelector(".btn");
 
-  if(ok){
+  if(preenchido){
     btn.disabled = false;
-    btn.classList.add("ativo");
+    btn.style.opacity = "1";
   }else{
     btn.disabled = true;
-    btn.classList.remove("ativo");
+    btn.style.opacity = "0.5";
   }
 }
 
 
+/* OLHO */
 function toggleSenha(id, el){
 
   const input = document.getElementById(id);
 
   if(input.type === "password"){
     input.type = "text";
-    el.classList.add("off"); // fica vermelho
+    el.style.color = "red"; // 🔴 vermelho
   }else{
     input.type = "password";
-    el.classList.remove("off");
+    el.style.color = "gray"; // ⚪ cinza
   }
 }
 
 
+/* CADASTRO */
 function cadastrar(){
 
-  alert("Seu cadastro foi concluído ✅");
+  alert("Seu cadastro foi concluído");
 
   window.location.href = "../pagina6/index.html";
 }
