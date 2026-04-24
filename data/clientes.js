@@ -5,7 +5,7 @@ let clientes = [];
 
 
 /* =========================
-   CARREGAR CLIENTES
+   CARREGAR
 ========================= */
 function carregarClientes(){
   const dados = localStorage.getItem("clientes");
@@ -23,9 +23,8 @@ carregarClientes();
 function salvarCliente(cliente){
 
   // 🚨 TELEFONE DUPLICADO
-  const existe = clientes.find(c => c.telefone === cliente.telefone);
-
-  if(existe){
+  const telefoneExiste = clientes.find(c => c.telefone === cliente.telefone);
+  if(telefoneExiste){
     alert("Esse número já está cadastrado");
     return false;
   }
@@ -37,7 +36,8 @@ function salvarCliente(cliente){
     telefone: cliente.telefone,
     endereco: cliente.endereco,
     senha: cliente.senha,
-    foto: cliente.foto || "",
+
+    fotoPerfil: cliente.fotoPerfil || "",
 
     status: "ativo",
     criadoEm: new Date().toISOString()
@@ -46,26 +46,31 @@ function salvarCliente(cliente){
   clientes.push(novoCliente);
 
   localStorage.setItem("clientes", JSON.stringify(clientes));
+  localStorage.setItem("clienteAtualId", novoCliente.id);
 
   return true;
 }
 
 
 /* =========================
-   BUSCAR CLIENTE
+   BUSCAR
 ========================= */
 function buscarCliente(telefone){
   return clientes.find(c => c.telefone === telefone);
 }
 
+function getClientePorId(id){
+  return clientes.find(c => c.id == id);
+}
+
 
 /* =========================
-   ATUALIZAR CLIENTE
+   ATUALIZAR
 ========================= */
 function atualizarCliente(id, dadosAtualizados){
 
   clientes = clientes.map(c => {
-    if(c.id === id){
+    if(c.id == id){
       return { ...c, ...dadosAtualizados };
     }
     return c;
@@ -76,19 +81,55 @@ function atualizarCliente(id, dadosAtualizados){
 
 
 /* =========================
-   BLOQUEAR CLIENTE
-========================= */
-function bloquearCliente(id){
-  atualizarCliente(id, { status: "bloqueado" });
-}
-
-
-/* =========================
-   REMOVER CLIENTE
+   REMOVER
 ========================= */
 function removerCliente(id){
 
   clientes = clientes.filter(c => c.id !== id);
 
   localStorage.setItem("clientes", JSON.stringify(clientes));
+}
+
+
+/* =========================
+   LOGIN
+========================= */
+function loginCliente(telefone, senha){
+
+  const cliente = clientes.find(c => c.telefone === telefone && c.senha === senha);
+
+  if(!cliente){
+    alert("Telefone ou senha inválidos");
+    return null;
+  }
+
+  localStorage.setItem("clienteLogadoId", cliente.id);
+
+  return cliente;
+}
+
+
+/* =========================
+   SESSÃO
+========================= */
+function getClienteLogado(){
+  const id = localStorage.getItem("clienteLogadoId");
+  if(!id) return null;
+  return getClientePorId(id);
+}
+
+function logoutCliente(){
+  localStorage.removeItem("clienteLogadoId");
+}
+
+
+/* =========================
+   FLUXO
+========================= */
+function getClienteAtualId(){
+  return localStorage.getItem("clienteAtualId");
+}
+
+function limparClienteAtual(){
+  localStorage.removeItem("clienteAtualId");
 }
