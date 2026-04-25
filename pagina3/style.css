@@ -108,17 +108,22 @@ label{
   stroke:red;
 }
 
-.eye.off::after{
-  content:"";
-  position:absolute;
-  width:20px;
-  height:2px;
-  background:red;
-  transform:rotate(45deg);
-  top:50%;
-  left:0;
+.eye{
+  color: gray;
+  position: relative;
 }
 
+/* 🔴 linha do X */
+.eye.off::after{
+  content: "";
+  position: absolute;
+  width: 20px;
+  height: 2px;
+  background: red;
+  top: 50%;
+  left: 0;
+  transform: rotate(45deg);
+}
 .link-voltar{
   display:inline-block;
   margin-top:15px;
