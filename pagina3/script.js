@@ -100,15 +100,14 @@ function validar(){
 
 /* OLHO */
 function toggleSenha(id, el){
-
   const input = document.getElementById(id);
 
   if(input.type === "password"){
     input.type = "text";
-    el.classList.add("off"); // 🔴 ativa o X
+    el.classList.add("off");
   }else{
     input.type = "password";
-    el.classList.remove("off"); // remove X
+    el.classList.remove("off");
   }
 }
 
