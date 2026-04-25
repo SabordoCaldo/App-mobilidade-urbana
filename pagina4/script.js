@@ -140,7 +140,7 @@ function toggleSenha(id, el){
 
 function cadastrarMotorista(){
 
-  alert("Cadastro concluído");
+  alert("Falta pouco!\nAgora cadastre seu veículo 🚗");
 
   window.location.href = "../pagina5/index.html";
 }
