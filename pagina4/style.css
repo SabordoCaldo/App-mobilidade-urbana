@@ -94,11 +94,11 @@ input[type="file"]{
 /* OLHO */
 .eye{
   position:absolute;
-  right:10px;
+  right:12px;
   top:50%;
   transform:translateY(-50%);
-  width:20px;
-  height:20px;
+  width:22px;
+  height:22px;
   cursor:pointer;
 }
 
@@ -122,7 +122,7 @@ input[type="file"]{
 .eye.off::after{
   content:"";
   position:absolute;
-  width:20px;
+  width:22px;
   height:2px;
   background:red;
   transform:rotate(45deg);
