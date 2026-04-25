@@ -79,9 +79,10 @@ function salvarVeiculo(){
     fotoCRLV
   });
 
-  alert("Cadastro finalizado com sucesso 🚀");
+  function salvarVeiculo(){
 
+  alert("Cadastro finalizado!\n\nAguarde aprovação.\nDepois faça seu login 🚀");
   limparMotoristaAtual();
 
-  window.location.href = "../pagina1/";
+  window.location.href = "../pagina1/index.html";
 }
