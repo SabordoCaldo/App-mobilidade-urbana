@@ -105,13 +105,12 @@ function toggleSenha(id, el){
 
   if(input.type === "password"){
     input.type = "text";
-    el.style.color = "red"; // X vermelho
+    el.classList.add("off"); // 🔴 ativa o X
   }else{
     input.type = "password";
-    el.style.color = "gray"; // olho cinza
+    el.classList.remove("off"); // remove X
   }
 }
-
 
 /* CADASTRO */
 function cadastrar(){
