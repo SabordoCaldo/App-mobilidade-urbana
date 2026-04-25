@@ -82,11 +82,11 @@ label{
 /* 👁️ OLHO IGUAL PÁGINA 1 */
 .eye{
   position:absolute;
-  right:10px;
+  right:12px;
   top:50%;
   transform:translateY(-50%);
-  width:20px;
-  height:20px;
+  width:22px;
+  height:22px;
   cursor:pointer;
 }
 
@@ -102,15 +102,20 @@ label{
   fill:none;
 }
 
-/* OLHO FECHADO */
 .eye.off path,
 .eye.off circle{
   stroke:red;
 }
 
-.eye{
-  color: gray;
-  position: relative;
+.eye.off::after{
+  content:"";
+  position:absolute;
+  width:22px;
+  height:2px;
+  background:red;
+  transform:rotate(45deg);
+  top:50%;
+  left:0;
 }
 
 /* 🔴 linha do X */
